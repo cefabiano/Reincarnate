@@ -1,0 +1,58 @@
+The game is separated into columns of past, present, and future:
+ - The present is what currently is working to increase one's resources.
+ - The past is former runs that one must tranfer their population over from.
+   I wanna make this poetic feeling, a very "don't ignore your past and what got you started" 
+   feel. There could also exist upgrades that grant bonuses based on the old runs
+ - The future is about building the next life. The player has control over the afterlife
+   and must create it in their own image.
+   
+Why design your future? By deciding what goes into the next reincarnation, that next life will
+have bonuses based on how you made it. This allows players to shoot for certain things at the
+price of being slower in other areas. As with incremental games, the amount of bonuses will outweigh
+the bad things so each run is an improvement upon the last.
+
+How to enhance the future? In the future section of the game, there will be an option for every improvable resource.
+Each of these options have 3 slots for tokens. By spending enough of the respective resource plus maybe some other
+expensive ones you can create a token and throw it into a matching slot. Each token of a resource will cost more
+than the last but the third one will be less effective. The third token will be an option thats kinda inefficient
+and for when you're extra focusing a resource. The amount of total tokens you can create is based on your follower
+count so you can't fill all the slots of all the resources until the endgame.
+
+There needs to be things that require a certain amount of followers so that you need to do a certain
+amount of jumps to get there. The player has to feel like they're accessing new content every new world, which turns
+into every few new worlds, and eventually the content actually does run out as they get the thing that required
+the highest amount of followers.
+
+I want the first run to be just the player alone. Their max amount of followers is 1 and that's
+them. That way they must create their own first afterlife, allowing the "past" tab to be
+almost immediately useful. Each new life will allow for a greater follower base than the last.
+
+Some followers will randomly not make it when they die and try to cross into the new afterlife. This is
+because they were unfaithful and instead went to hell. there should be some way to improve follower retention
+through a building or whatever. Lost followers will slowly be replaced by new ones in the new world.
+
+Another way to get followers into the next world is for them to become martyrs. A follower may kill themselves
+and get replaced by another new follower only to be waiting for you when you arrive in the new world and your
+cap is higher. This isn't something you can do a lot and requires you to have some tokens into follower count
+so that you'll veritably have room for them in the new world.
+
+Things you can focus on increasing when crafting an afterlife: 
+ - Max follower size
+ - Money. I have an idea where the name of the currency changes every run because it's a new world.
+   Maybe the player can name the currency every reincarnation.
+ - Research. Used for discovering new building's and upgrades. Idk what kind of freedom this will have. I'd
+   like to have a system where you consult a scrying orb that asks you what you wanna research, then tells you
+   how much you'll need to get the next research related to that. If you have a high enough research cap it'll say
+   "it is within grasp" and if you already have enough research stored it'll say "this knowledge is available to you."
+   If the price of this next subject is way higher than one of the lower prices that you can pursue it'll be
+   like "don't neglect other forms of research."
+ - Insight. This is the more mystical approach to gaining knowledge. Insight is needed in addition to research for
+   upgrades ore realated to magical stuff. I want to really strongly emphazise that the research of magic is
+   a form of science and that stupid science magic schism fiction pushes forward is bs.
+ - Blood. The most basic resource for the more mystical aspects of the game. This blood is taken from your followers
+   so it will be directly proportional to your follower count. Maybe you can also get blood by just heading out
+   and culling nonaffiliated population.
+ - Thread. This is thread stolen from the timeline woven by the fates. It is farmed slowly by an expensive building and
+   is used to craft an afterlife. It's used in tokens and spent on the actual "create afterlife" button.
+
+Flavor text on the create afterlife button has to be "Go forth and instantiate"

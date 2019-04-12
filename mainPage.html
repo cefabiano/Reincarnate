@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Reincarnate</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="StyleSheet.css" />
+    <link rel="stylesheet" media="screen" href="https://fonts.googleapis.com/css?family=PT+Serif">
+    <script src="updateScript.js"></script>
+</head>
+<body onload="update()">
+    <div id="container">
+        <div id="leftcolumn">
+            <p>Left Column</p>
+        </div> <!-- closes left column -->
+        <div id="centercolumn">
+            <div id="resources">
+                <!-- followers -->
+                <p style="color: #000000" class="resourceTitle">Followers:</p>
+                <p class="resourceAmount" id="followers">1</p>
+                <p class="resourceCap" id="followerCap">/ 1</p>
+                <p class="resourceRate" id="followerRate">(+0/sec)</p><br />
+                <!-- florgels -->
+                <p style="color: #19c910" class="resourceTitle" id="moneyTitle">Money:</p>
+                <p class="resourceAmount" id="money">10</p>
+                <p class="resourceCap" id="moneyCap">/ 100</p>
+                <p class="resourceRate" id="moneyRate">(+0/sec)</p><br />
+                <!-- research -->
+                <p style="color: #5abfe8" class="resourceTitle" id="researchTitle">Research:</p>
+                <p class="resourceAmount" id="research">0</p>
+                <p class="resourceCap" id="researchCap">/ 100</p>
+                <p class="resourceRate" id="researchRate">(+0/sec)</p><br />
+                <!-- insight -->
+                <p style="color: #cf50d8" class="resourceTitle" id="insightTitle">Insight:</p>
+                <p class="resourceAmount" id="insight">0</p>
+                <p class="resourceCap" id="insightCap">/ 0</p>
+                <p class="resourceRate" id="insightRate">(+0/sec)</p><br />
+                <!-- blood -->
+                <p style="color: #bf1a28" class="resourceTitle" id="bloodTitle">Blood:</p>
+                <p class="resourceAmount" id="blood">0</p>
+                <p class="resourceCap" id="bloodCap">/ 0</p>
+                <p class="resourceRate" id="bloodRate">(+0/sec)</p><br />
+                <!-- thread -->
+                <p style="color: #000000" class="resourceTitle" id="threadTitle">Thread:</p>
+                <p class="resourceAmount" id="thread">0</p>
+                <p class="resourceCap" id="threadCap">/ 0</p>
+                <p class="resourceRate" id="threadRate">(+0/sec)</p><br />
+            </div> <!-- closes center resources -->
+            <div id="buttons">
+                <div id="garageSaleDiv" class="buttonDivs">
+                    <img class="button" alt="oops" src="square.png">
+                    <p class="buttonText">Garage Sale</p>
+                    <p class="countText" id="garageSaleCount">0</p>
+                    <p class="priceText" id="garageSalePrice">10 Money</p>
+                    <a onclick="garageSale.buy()" id="garageSaleCover" href="javascript:void(0)" onmouseover="buttonHover(event, this)" onmousemove="buttonStay(event)" onmouseout="noButtonHover()"><img class="buttonCover" alt="oops" src="none.png"></a>
+                </div><!-- closes garage sale -->
+                <div id="bankDiv" class="buttonDivs">
+                    <img class="button" alt="oops" src="square.png">
+                    <p class="buttonText">Bank</p>
+                    <p class="countText" id="bankCount">0</p>
+                    <p class="priceText" id="bankPrice">50 Money</p>
+                    <a onclick="bank.buy()" id="bankCover" href="javascript:void(0)" onmouseover="buttonHover(event, this)" onmousemove="buttonStay(event)" onmouseout="noButtonHover()"><img class="buttonCover" alt="oops" src="black.png" id="bankCover"></a>
+                </div><!-- closes bank -->
+                <div id="ti84Div" class="buttonDivs">
+                    <img class="button" alt="oops" src="square.png">
+                    <p class="buttonText">TI-84 Calculator</p>
+                    <p class="countText" id="ti84Count">0</p>
+                    <p class="priceText" id="ti84Price">101 Money</p>
+                    <a onclick="ti84.buy()" id="ti84Cover" href="javascript:void(0)" onmouseover="buttonHover(event, this)" onmousemove="buttonStay(event)" onmouseout="noButtonHover()"><img class="buttonCover" alt="oops" src="black.png" id="ti84Cover"></a>
+                </div><!-- closes ti84 -->
+            </div> <!-- closes center buttons -->
+        </div> <!-- closes center column -->
+        <div id="rightcolumn">
+            <p>Right Column</p>
+        </div> <!-- closes right column -->
+        <div id="mouseOver">
+            <div id="topSection">
+                <p id="topSecText">
+                    In order to get the ball rolling, you're gonna have to start selling some of your old belonings
+                    from your garage. Dont worry, none of this stuff was coming along for the ride anyways.
+                </p>
+                <p id="secBorder">____________________________</p>
+            </div> <!-- closes top section -->
+            <div id="midSection">
+                <p id="midSecText" class="midSecText">+0.045/sec</p>
+                <p id="midSecText2" class="midSecText">Price Ratio: 1.15</p>
+            </div> <!-- closes top section -->
+            <div id="botSection">
+                <p id="botSecText" class="botSecText">There's a lot more in here than I remember</p>
+            </div> <!-- closes bottom section -->
+        </div> <!-- closes mouse over -->
+    </div> <!-- closes container -->
+</body>
+</html>

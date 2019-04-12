@@ -1,0 +1,152 @@
+﻿body {
+    font-family: 'PT Serif', serif;
+}
+/*div styles*/
+#container {
+	width: 100%;
+    height: 100%;
+}
+#leftcolumn {
+	width: 33%;
+	height: 100%;
+	float: left;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+	background-color: #FFFFFF;
+}
+#centercolumn {
+	width: 33%;
+	height: 100%;
+	float: left;
+	border-style: solid;
+	border-width: 1px;
+	background-color: #777777;
+}
+#rightcolumn {
+	width: 33%;
+	height: 100%;
+	float: left;
+	border-style: solid;
+	border-width: 1px;
+	background-color: #FFFFFF;
+}
+#resources {
+    margin-top: 12px;
+    margin-left: 12px;
+    margin-bottom: 40px;
+    margin-right: 12px;
+}
+#buttons {
+    height: 100%;
+    margin-top: 24px;
+    margin-left: 12px;
+    margin-bottom: 12px;
+    margin-right: 12px;
+}
+div.buttonDivs {
+    margin-bottom: 35px;
+    height: 50px;
+}
+#mouseOver {
+    position: fixed;
+    font-size: 14px;
+    width: 15%;
+    border-style: solid;
+    border-width: 1px;
+    background-color: #FFFFFF;
+    z-index: 3;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/*mouse over text sections*/
+#topSection {
+    width: 90%;
+    margin-left: 5%;
+    text-align: center;
+}
+#topSecText {
+    margin-bottom: 0px;
+}
+#secBorder {
+    margin-top: 0px;
+}
+#midSection {
+    width: 90%;
+    margin-left: 5%;
+    text-align: center;
+}
+p.midSecText {
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+#botSection {
+    text-align: center;
+    font-size: 10px;
+    font-style: italic;
+    color: #424242;
+}
+
+/*resource text styes*/
+p.resourceTitle {
+	display: inline;
+}
+p.resourceAmount {
+	display: inline;
+}
+p.resourceCap {
+	display: inline;
+}
+p.resourceRate {
+	display: inline;
+}
+
+/*button related*/
+img.button {
+    width: 90%;
+    height: 50px;
+    margin-left: 5%;
+    margin-bottom: 0px;
+}
+img.buttonCover {
+    position: relative;
+    top: -168px;
+    width: 90%;
+    height: 50px;
+    margin-left: 5%;
+    z-index: 2;
+}
+p.buttonText {
+    position: relative;
+    top: -57px;
+    left: 10%;
+    margin-bottom: 0px;
+    z-index: 1;
+}
+p.countText {
+    position: relative;
+    top: -96px;
+    font-size: 36px;
+    color: #424242;
+    left: 82%;
+    margin-bottom: 0px;
+    margin-top: 3px;
+    z-index: 1;
+}
+p.priceText {
+    position: relative;
+    top: -133px;
+    left: 42%;
+    margin-bottom: 0px;
+    margin-top: 3px;
+    z-index: 1;
+}
+p.priceText2 {
+    position: relative;
+    top: -144px;
+    left: 42%;
+    margin-bottom: 0px;
+    margin-top: 3px;
+    z-index: 1;
+}
