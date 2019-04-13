@@ -7,7 +7,7 @@ var money = 10, moneyRate = 0, moneyCap = 100, research = 0, researchRate = 0, r
 
 //building stats
 class Building {
-    constructor(price, price2, priceRatio, priceType, priceType2, benefit, desc, flavor) {
+    constructor(price, price2, priceRatio, priceType, priceType2, isOpen, benefit, desc, flavor) {
         this.count = 0;
         this.price = price;
         this.price2 = price2;
@@ -121,9 +121,10 @@ class Building {
         this.price = this.price * this.priceRatio;
     }
 }
-let garageSale = new Building(10, 0, 1.15, 0, -1, "+0.045/sec", "In order to get the ball rolling, you're gonna have to start selling some of your old belonings from your garage. Dont worry, none of this stuff was coming along for the ride anyways.", "There's more stuff in here than I remember");
-let bank = new Building(50, 0, 1.25, 0, -1);
-let ti84 = new Building(101, 0, 1.15, 0, -1);
+let garageSale = new Building(10, 0, 1.15, 0, -1, true, "+0.045 Money/sec", "In order to get the ball rolling, you're gonna have to start selling some of your old belonings from your garage. Dont worry, none of this stuff was coming along for the ride anyways.", "There's more stuff in here than I remember");
+let wallet = new Building(50, 0, 1.25, 0, -1, false, "100 max Money", "A wallet you found on the ground. Used to store more money.", "can store just about anything, really");
+let ti84 = new Building(101, 0, 1.15, 0, -1, false, "+0.005 Research/sec", "Top of the line calculator from Staples. It specializes in converting equations into line graphs.", "2318008");
+var isOrb = false;
 
 //tick
 var interval = setInterval(update, 250);
@@ -138,8 +139,8 @@ function update() {
     //update buttons
     document.getElementById("garageSalePrice").innerHTML = (textCondense(garageSale.price) + " Money");
     updateCount("garageSaleCount", garageSale.count);
-    document.getElementById("bankPrice").innerHTML = (textCondense(bank.price) + " Money");
-    updateCount("bankCount", bank.count);
+    document.getElementById("walletPrice").innerHTML = (textCondense(wallet.price) + " Money");
+    updateCount("walletCount", wallet.count);
     document.getElementById("ti84Price").innerHTML = (textCondense(ti84.price) + " Money");
     updateCount("ti84Count", ti84.count);
     updateBoard();
@@ -160,12 +161,18 @@ function updateCount(string, count) {
 function updateBoard() {
     var latestButton = garageSale;
     if (garageSale.count != 0) {
-        latestButton = bank;
-        document.getElementById("bankCover").src = "none.png";
+        latestButton = wallet;
+        document.getElementById("walletCover").src = "none.png";
+        wallet.isOpen = true;
     }
-    if (bank.count != 0) {
+    if (wallet.count != 0) {
         latestButton = ti84;
         document.getElementById("ti84Cover").src = "none.png";
+        ti84.isOpen = true;
+    }
+    if (research >= 1) {
+        document.getElementById("orbCover").src = "none.png";
+        isOrb = true;
     }
     //.insertAdjacentHTML("afterend", "<p>My new paragraph</p>");
 }
@@ -197,7 +204,7 @@ function textCondense(x) {
 function calculator() {
     var sum = garageSale.count * 0.045;
     moneyRate = sum;
-    sum = bank.count * 100 + 100;
+    sum = wallet.count * 100 + 100;
     moneyCap = sum;
     sum = ti84.count * 0.005;
     researchRate = sum;
@@ -217,6 +224,20 @@ function addClamp(x, y, cap) {
 function buttonHover(event, id) {
     var x = event.clientX;
     var y = event.clientY;
+    if (id.id == "garageSaleLink") {
+        updateHover(garageSale);
+    } else if (id.id == "walletLink" && wallet.isOpen) {
+        updateHover(wallet);
+    } else if (id.id == "ti84Link" && ti84.isOpen) {
+        updateHover(ti84);
+    } else if (id.id == "orbLink" && isOrb) {
+        document.getElementById("topSecText").innerHTML = "Call upon the mystical forces of your scrying orb to guide your research. May its enigmatic nature bring you to the correct path.";
+        document.getElementById("midSecText").innerHTML = "";
+        document.getElementById("midSecText2").innerHTML = "";
+        document.getElementById("botSecText").innerHTML = "The glassy walls of the orb of vision bounce with a rainbow of colors, giving off an air of a mysterious, yet positive future.";
+    } else {
+        return;
+    }
     document.getElementById("mouseOver").style.left = (x).toString() + "px";
     if (y - document.getElementById("mouseOver").clientHeight >= 0) {
         document.getElementById("mouseOver").style.top = (y - document.getElementById("mouseOver").clientHeight).toString() + "px";
@@ -225,9 +246,12 @@ function buttonHover(event, id) {
     }
     document.getElementById("mouseOver").style.visibility = "visible";
     document.getElementById("mouseOver").style.zIndex = "3";
-    if (id.id == "garageSaleCover") {
-        document.getElementById("topSecText").innerHTML = "Hello";
-    }
+}
+function updateHover(building) {
+    document.getElementById("topSecText").innerHTML = building.desc;
+    document.getElementById("midSecText").innerHTML = building.benefit;
+    document.getElementById("midSecText2").innerHTML = "Price Ratio: " + building.priceRatio;
+    document.getElementById("botSecText").innerHTML = building.flavor;
 }
 function buttonStay(event) {
     var x = event.clientX;

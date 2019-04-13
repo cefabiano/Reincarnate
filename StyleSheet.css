@@ -23,6 +23,14 @@
 	border-width: 1px;
 	background-color: #777777;
 }
+#orbColumn {
+    width: 33%;
+    height: 130px;
+    float: left;
+    border-style: solid;
+    border-width: 1px;
+    background-color: #5b5b5b;
+}
 #rightcolumn {
 	width: 33%;
 	height: 100%;
@@ -82,6 +90,8 @@ p.midSecText {
     margin-top: 0px;
 }
 #botSection {
+    width: 90%;
+    margin-left: 5%;
     text-align: center;
     font-size: 10px;
     font-style: italic;
@@ -148,5 +158,31 @@ p.priceText2 {
     left: 42%;
     margin-bottom: 0px;
     margin-top: 3px;
+    z-index: 1;
+}
+
+/*orb*/
+img.orbButton {
+    position: relative;
+    width: 80%;
+    height: 50px;
+    top: 40px;
+    margin-left: 10%;
+    margin-bottom: 0px;
+}
+img.orbCover {
+    position: relative;
+    top: -80px;
+    width: 80%;
+    height: 51px;
+    margin-left: 10%;
+    z-index: 2;
+}
+p.orbText {
+    position: relative;
+    top: -37px;
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 0px;
     z-index: 1;
 }

@@ -52,24 +52,33 @@
                     <p class="buttonText">Garage Sale</p>
                     <p class="countText" id="garageSaleCount">0</p>
                     <p class="priceText" id="garageSalePrice">10 Money</p>
-                    <a onclick="garageSale.buy()" id="garageSaleCover" href="javascript:void(0)" onmouseover="buttonHover(event, this)" onmousemove="buttonStay(event)" onmouseout="noButtonHover()"><img class="buttonCover" alt="oops" src="none.png"></a>
+                    <a onclick="garageSale.buy()" id="garageSaleLink" href="javascript:void(0)" onmouseover="buttonHover(event, this)" 
+                       onmousemove="buttonStay(event)" onmouseout="noButtonHover()"><img class="buttonCover" alt="oops" src="none.png"></a>
                 </div><!-- closes garage sale -->
-                <div id="bankDiv" class="buttonDivs">
+                <div id="walletDiv" class="buttonDivs">
                     <img class="button" alt="oops" src="square.png">
-                    <p class="buttonText">Bank</p>
-                    <p class="countText" id="bankCount">0</p>
-                    <p class="priceText" id="bankPrice">50 Money</p>
-                    <a onclick="bank.buy()" id="bankCover" href="javascript:void(0)" onmouseover="buttonHover(event, this)" onmousemove="buttonStay(event)" onmouseout="noButtonHover()"><img class="buttonCover" alt="oops" src="black.png" id="bankCover"></a>
-                </div><!-- closes bank -->
+                    <p class="buttonText">wallet</p>
+                    <p class="countText" id="walletCount">0</p>
+                    <p class="priceText" id="walletPrice">50 Money</p>
+                    <a onclick="wallet.buy()" id="walletLink" href="javascript:void(0)" onmouseover="buttonHover(event, this)" 
+                       onmousemove="buttonStay(event)" onmouseout="noButtonHover()"><img class="buttonCover" alt="oops" src="black.png" id="walletCover"></a>
+                </div><!-- closes wallet -->
                 <div id="ti84Div" class="buttonDivs">
                     <img class="button" alt="oops" src="square.png">
                     <p class="buttonText">TI-84 Calculator</p>
                     <p class="countText" id="ti84Count">0</p>
                     <p class="priceText" id="ti84Price">101 Money</p>
-                    <a onclick="ti84.buy()" id="ti84Cover" href="javascript:void(0)" onmouseover="buttonHover(event, this)" onmousemove="buttonStay(event)" onmouseout="noButtonHover()"><img class="buttonCover" alt="oops" src="black.png" id="ti84Cover"></a>
+                    <a onclick="ti84.buy()" id="ti84Link" href="javascript:void(0)" onmouseover="buttonHover(event, this)" 
+                       onmousemove="buttonStay(event)" onmouseout="noButtonHover()"><img class="buttonCover" alt="oops" src="black.png" id="ti84Cover"></a>
                 </div><!-- closes ti84 -->
             </div> <!-- closes center buttons -->
         </div> <!-- closes center column -->
+        <div id="orbColumn">
+            <img class="orbButton" alt="oops" src="square.png">
+            <p class="orbText">Consult the Orb!</p>
+            <a onclick="ti84.buy()" id="orbLink" href="javascript:void(0)" onmouseover="buttonHover(event, this)" 
+               onmousemove="buttonStay(event)" onmouseout="noButtonHover()"><img class="orbCover" alt="oops" src="black.png" id="orbCover"></a>
+        </div> <!-- closes orb column -->
         <div id="rightcolumn">
             <p>Right Column</p>
         </div> <!-- closes right column -->
@@ -79,7 +88,7 @@
                     In order to get the ball rolling, you're gonna have to start selling some of your old belonings
                     from your garage. Dont worry, none of this stuff was coming along for the ride anyways.
                 </p>
-                <p id="secBorder">____________________________</p>
+                <p id="secBorder">__________________________________</p>
             </div> <!-- closes top section -->
             <div id="midSection">
                 <p id="midSecText" class="midSecText">+0.045/sec</p>
