@@ -97,19 +97,19 @@ class Building{
             case -1:
                 break;
             case 0:
-                money -= this.price;
+                money -= this.price2;
                 break;
             case 1:
-                research -= this.price;
+                research -= this.price2;
                 break;
             case 2:
-                insight -= this.price;
+                insight -= this.price2;
                 break;
             case 3:
-                blood -= this.price;
+                blood -= this.price2;
                 break;
             case 4:
-                thread -= this.price;
+                thread -= this.price2;
                 break;
         }
         this.count++;
@@ -149,27 +149,27 @@ class Building{
                 isWhite++;
                 break;
             case 0:
-                if (money >= this.price) {
+                if (money >= this.price2) {
                     isWhite++;
                 }
                 break;
             case 1:
-                if (research >= this.price) {
+                if (research >= this.price2) {
                     isWhite++;
                 }
                 break;
             case 2:
-                if (insight >= this.price) {
+                if (insight >= this.price2) {
                     isWhite++;
                 }
                 break;
             case 3:
-                if (blood >= this.price) {
+                if (blood >= this.price2) {
                     isWhite++;
                 }
                 break;
             case 4:
-                if (thread >= this.price) {
+                if (thread >= this.price2) {
                     isWhite++;
                 }
                 break;

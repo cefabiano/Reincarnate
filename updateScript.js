@@ -6,17 +6,22 @@ var money = 10, moneyRate = 0, moneyCap = 100, research = 0, researchRate = 0, r
     thread = 0, threadRate = 0, threadCap = 0, followers = 0, followerCap = 1;
 
 //building stats
-let garageSale = new Building(10, 0, 1.15, 0, -1, true, "garageSaleImg", "+0.045 Money/sec", "In order to get the ball rolling, you're gonna have to start selling some of your old belonings from your garage. Dont worry, none of this stuff was coming along for the ride anyways.", "There's more stuff in here than I remember");
-let wallet = new Building(50, 0, 1.25, 0, -1, false, "walletImg", "100 max Money", "A wallet you found on the ground. Used to store more money.", "can store just about anything, really");
-let ti84 = new Building(101, 0, 1.15, 0, -1, false, "ti84Img", "+0.005 Research/sec", "Top of the line calculator from Staples. It specializes in converting equations into line graphs.", "2318008");
-var buildings = [garageSale, wallet, ti84];
+let garageSale = new Building(10, 0, 1.13, 0, -1, true, "garageSaleImg", "+0.05 <span style=\"color: #19c910\">Money</span>/sec", "In order to get the ball rolling, you're gonna have to start selling some of your old belonings from your garage. Dont worry, none of this stuff was coming along for the ride anyways.", "There's more stuff in here than I remember");
+let wallet = new Building(50, 0, 1.25, 0, -1, false, "walletImg", "100 max <span style=\"color: #19c910\">Money</span>", "A wallet you found on the ground. Used to store more money.", "Can store just about anything, really");
+let ti84 = new Building(101, 0, 1.13, 0, -1, false, "ti84Img", "+0.003 <span style=\"color: #5abfe8\">Research</span>/sec", "Top of the line calculator from Staples. It specializes in converting equations into line graphs.", "2318008");
+let microscope = new Building(550, 1, 1.15, 0, 1, false, "microscopeImg", "+0.02 <span style=\"color: #5abfe8\">Research</span>/sec<br>+6 max <span style=\"color: #5abfe8\">Research</span>", "A powerful microscope you allegedly stole from the high school you TA\'ed at for a year. Enhances sight drastically, allowing for deeper investigation.", "Sight beyond sight");
+let laundromat = new Building(900, 0, 1.15, 0, -1, false, "laundromatImg", "+0.5 <span style=\"color: #19c910\">Money</span>/sec", "Alright. It's time to start getting serious with money. Opening a small busniess should help you accelerate your funds to the next level.", "What do you mean that's not what money laundering means?");
+var buildings = [garageSale, wallet, ti84, microscope, laundromat];
 var isOrb = false;
 
 //subject stats
 let def = new Subject("Default", 999999, 999999, false, false, null, "you shouldn't be seeing this", "you shouldn't be seeing this", "you shouldn't be seeing this");
 let curiosity = new Subject("Curiosity", 1, 0, false, false, null, "Allows for further research to be conducted", "All research begins with the spark of curiosity. To indulge this curiosity is to bring forth progress and unlock what cannot be found through inaction.", "curiosity kills only cats that fear the dark");
-let sample = new Subject("Sample", 2, 0, false, true, curiosity, "sample", "sample", "sample");
-var subjects = [curiosity, sample];
+let businessOwnership = new Subject("Business Ownership", 6, 0, false, true, curiosity, "Opens up a new button", "The basics of business management. With this knowledge you can start your own fledgeling operation to rake in a few extra dollars.", "Sign here to agree that you can be arrested for unionizing");
+let sample2 = new Subject("Sample2", 6, 0, false, true, curiosity, "sample", "sample", "sample");
+let sample3 = new Subject("Sample3", 6, 0, false, true, sample2, "sample", "sample", "sample");
+let sample4 = new Subject("Sample4", 6, 0, false, true, sample2, "sample", "sample", "sample");
+var subjects = [curiosity, businessOwnership, sample2, sample3, sample4];
 var scryArray = [];
 
 //tick * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\\
@@ -30,12 +35,17 @@ function update() {
     updateResource("money", "moneyRate", "moneyCap", money, moneyRate, moneyCap);
     updateResource("research", "researchRate", "researchCap", research, researchRate, researchCap);
     //update buttons
-    document.getElementById("garageSalePrice").innerHTML = (textCondense(garageSale.price) + " Money");
+    document.getElementById("garageSalePrice").innerHTML = (textCondense(garageSale.price) + " <span style=\"color: #19c910\">Money</span>");
     updateCount("garageSaleCount", garageSale.count);
-    document.getElementById("walletPrice").innerHTML = (textCondense(wallet.price) + " Money");
+    document.getElementById("walletPrice").innerHTML = (textCondense(wallet.price) + " <span style=\"color: #19c910\">Money</span>");
     updateCount("walletCount", wallet.count);
-    document.getElementById("ti84Price").innerHTML = (textCondense(ti84.price) + " Money");
+    document.getElementById("ti84Price").innerHTML = (textCondense(ti84.price) + " <span style=\"color: #19c910\">Money</span>");
     updateCount("ti84Count", ti84.count);
+    document.getElementById("microscopePrice").innerHTML = (textCondense(microscope.price) + " <span style=\"color: #19c910\">Money</span>");
+    document.getElementById("microscopePrice2").innerHTML = (textCondense(microscope.price2) + " <span style=\"color: #5abfe8\">Research</span>");
+    updateCount("microscopeCount", microscope.count);
+    document.getElementById("laundromatPrice").innerHTML = (textCondense(laundromat.price) + " <span style=\"color: #19c910\">Money</span>");
+    updateCount("laundromatCount", laundromat.count);
     updateBoard();
     buildings.forEach(grayOut);
 }
@@ -63,13 +73,26 @@ function updateBoard() {
         latestButton = ti84;
         document.getElementById("ti84Cover").src = "none.png";
         ti84.isOpen = true;
+        document.getElementById("microscopeDiv").style.height = "50px";
+        document.getElementById("microscopeDiv").style.marginBottom = "35px";
+        document.getElementById("microscopeDiv").style.visibility = "visible";
     }
     if (research >= 1) {
         document.getElementById("orbCover").src = "none.png";
         isOrb = true;
     }
-    if (curiosity.competed) {
-
+    if (curiosity.completed) {
+        latestButton = microscope;
+        document.getElementById("microscopeCover").src = "none.png";
+        microscope.isOpen = true;
+        document.getElementById("laundromatDiv").style.height = "50px";
+        document.getElementById("laundromatDiv").style.marginBottom = "35px";
+        document.getElementById("laundromatDiv").style.visibility = "visible";
+    }
+    if (businessOwnership.completed) {
+        latestButton = laundromat;
+        document.getElementById("laundromatCover").src = "none.png";
+        laundromat.isOpen = true;
     }
     //.insertAdjacentHTML("afterend", "<p>My new paragraph</p>");
 }
@@ -90,7 +113,7 @@ function textCondense(x) {
         var temp2 = temp.toString() + "0000";
         var temp3 = temp2.indexOf(".");
         return (temp2.substring(0, (temp3 + 3)) + "K");
-    } else {
+    } else if (x >= 0.01) {
         var temp = x.toString() + "0000";
         var temp2 = temp.indexOf(".");
         if (x % 1 != 0) {
@@ -98,26 +121,36 @@ function textCondense(x) {
         } else {
             return x;
         }
+    } else if (x < 0.01){
+        var temp = x.toString() + "0000";
+        var temp2 = temp.indexOf(".");
+        return (temp.substring(0, (temp2 + 4)));
     }
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *//
 
 //value calculators * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\\
 function calculator() {
-    var sum = garageSale.count * 0.045;
+    var sum = garageSale.count * 0.05 + laundromat.count * 0.5;
     moneyRate = sum;
     sum = wallet.count * 100 + 100;
     moneyCap = sum;
-    sum = ti84.count * 0.005;
+    sum = ti84.count * 0.003 + microscope.count * 0.02;
     researchRate = sum;
-    sum = 2;
-    mresearchCap = sum;
+    sum = 2 + microscope.count * 6;
+    researchCap = sum;
 }
-
 function addClamp(x, y, cap) {
     x += y;
     if (x > cap) {
         x = cap;
+    }
+    return x;
+}
+function printSubs(subs) {
+    var x = "";
+    for (var i = 0; i < subs.length; i++) {
+        x = x + subs[i].name;
     }
     return x;
 }
@@ -128,6 +161,7 @@ function openScry() {
     document.getElementById("scryDiv").style.visibility = "visible";
 }
 function updateScryText() {
+    document.getElementById("scryLink").setAttribute("onclick", "");
     for (var i = 0; i < subjects.length && scryArray.length < 3; i++) {
         if (subjects[i].hasPreReq) {
             if (!subjects[i].priceType) {
@@ -158,13 +192,13 @@ function updateScryText() {
     } else if (scryArray.length == 1) {
         document.getElementById("subDiv1").style.visibility = "visible";
         document.getElementById("subText1").innerHTML = scryArray[0].name;
-        document.getElementById("scryText").innerHTML = "Embrace newfound knowledge! You have learned enough to delve into deeper varietys of research. This subject constitutes your future, do not shy away.";
-    } else if (scryArray.length == 2) {
+        document.getElementById("scryText").innerHTML = "Embrace newfound knowledge! You have learned enough to delve into deeper varieties of research. This subject constitutes your future, do not shy away.";
+    } else if (scryArray.length == 2 || scryArray.length == 1) {
         document.getElementById("subDiv1").style.visibility = "visible";
         document.getElementById("subText1").innerHTML = scryArray[0].name;
         document.getElementById("subDiv2").style.visibility = "visible";
         document.getElementById("subText2").innerHTML = scryArray[1].name;
-        document.getElementById("scryText").innerHTML = "Embrace newfound knowledge! You have learned enough to delve into deeper varietys of research. Select a subject to grace with your attention:";
+        document.getElementById("scryText").innerHTML = "Embrace newfound knowledge! You have learned enough to delve into deeper varietes of research. Select a subject to grace with your attention:";
     } else if (scryArray.length == 3) {
         document.getElementById("subDiv1").style.visibility = "visible";
         document.getElementById("subText1").innerHTML = scryArray[0].name;
@@ -172,7 +206,8 @@ function updateScryText() {
         document.getElementById("subText2").innerHTML = scryArray[1].name;
         document.getElementById("subDiv3").style.visibility = "visible";
         document.getElementById("subText3").innerHTML = scryArray[2].name;
-        document.getElementById("scryText").innerHTML = "Embrace newfound knowledge! You have learned enough to delve into deeper varietys of research. Select a subject to grace with your attention:";
+        document.getElementById("scryTextDiv").style.overflow = "auto";
+        document.getElementById("scryText").innerHTML = "Embrace newfound knowledge! You have learned enough to delve into deeper varieties of research. Select a subject to grace with your attention:";
     }
 }
 function lowestResult() {
@@ -186,12 +221,12 @@ function lowestResult() {
             }
         }
         if (lowest.priceType) {
-            document.getElementById("scryText").innerHTML = "Seek further inspiration. It seems that you are not ready to delve into any new subjects. There is more to gaining new knowledge than personal research. Sometimes some <span style=\"color: #cf50d8\">insight</span> granted by greater powers is needed to move forward.";
+            document.getElementById("scryText").innerHTML = "Seek further inspiration. It seems that you are not ready to delve into any new subjects. There is more to gaining new knowledge than personal research. Sometimes some <span style=\"color: #f411bb\">insight</span> granted by greater powers is needed to move forward.";
         } else {
             if (lowest.price > research) {
                 document.getElementById("scryText").innerHTML = "Seek further inspiration. It seems that you are not ready to delve into any new subjects. Persistence is key to <span style=\"color: #5abfe8\">research</span>";
             } else {
-                document.getElementById("scryText").innerHTML = "Seek further inspiration. It seems that you are not ready to delve into any new subjects. There is more to gaining new knowledge than personal research. Sometimes some <span style=\"color: #cf50d8\">insight</span> granted by greater powers is needed to move forward.";
+                document.getElementById("scryText").innerHTML = "Seek further inspiration. It seems that you are not ready to delve into any new subjects. There is more to gaining new knowledge than personal research. Sometimes some <span style=\"color: #f411bb\">insight</span> granted by greater powers is needed to move forward.";
             }
         }
     }
@@ -221,11 +256,12 @@ function finalizeScry(x) {
             var lengths = arr1.length + arr2.length;
             subjects = new Array(lengths);
             for (var i = 0; i < arr1.length; i++) {
-                subjects[0] = arr1[i];
+                subjects[i] = arr1[i];
             }
             for (var i = 0; i < arr2.length; i++) {
-                subjects[0] = arr2[arr1.length + i];
+                subjects[arr1.length + i] = arr2[i];
             }
+            //document.getElementById("followers").innerHTML = printSubs(subjects);
             break;
         }
     }
@@ -238,6 +274,8 @@ function finalizeScry(x) {
     document.getElementById("subButton3").src = "subGray.png";
     document.getElementById("scryLink").setAttribute("onclick", "updateScryText()");
     document.getElementById("scryButtonText").innerHTML = "Next";
+    document.getElementById("scryTextDiv").style.overflow = "hidden";
+    document.getElementById("scryTextDiv").scrollTop = "0px";
     for (var i = 0; i < 3; i++) {
         scryArray.pop();
     }
@@ -251,6 +289,8 @@ function closeScry() {
     document.getElementById("scryText").innerHTML = "You peer into the ethereal depths of your scrying orb. In its burdening truths you can see parts of what lie ahead of you. In a careful motion your eyes perform an elegant dance with the future, careful not to get lost in the labyrinth of information.After a short time you begin to see an answer take form.You urge the vision to tell you what to do next.As it becomes clearer you can see that the orb is telling you to...";
     document.getElementById("scryLink").setAttribute("onclick", "updateScryText()");
     document.getElementById("scryButtonText").innerHTML = "Next";
+    document.getElementById("scryTextDiv").style.overflow = "hidden";
+    document.getElementById("scryTextDiv").scrollTop = "0px";
 }
 function applyResearch(subject) {
     //curiosity is done in updateBoard()
@@ -267,6 +307,10 @@ function buttonHover(event, id) {
         updateHover(wallet);
     } else if (id.id == "ti84Link" && ti84.isOpen) {
         updateHover(ti84);
+    } else if (id.id == "microscopeLink" && microscope.isOpen) {
+        updateHover(microscope);
+    } else if (id.id == "laundromatLink" && laundromat.isOpen) {
+        updateHover(laundromat);
     } else if (id.id == "orbLink" && isOrb) {
         document.getElementById("topSecText").innerHTML = "Call upon the mystical forces of your scrying orb to guide your research. May its enigmatic nature bring you to the correct path.";
         document.getElementById("midSecText").innerHTML = "";
@@ -302,12 +346,12 @@ function updateHoverSub(subject) {
     document.getElementById("topSecText").innerHTML = subject.desc;
     document.getElementById("midSecText").innerHTML = subject.benefit;
     if (subject.pricType) {
-        document.getElementById("midSecText2").innerHTML = "<span style=\"color: #cf50d8\">Insight</span>: " + subject.price;
+        document.getElementById("midSecText2").innerHTML = "<span style=\"color: #f411bb\">Insight</span>: " + subject.price;
         document.getElementById("midSecText3").innerHTML = "";
     } else {
         document.getElementById("midSecText2").innerHTML = "<span style=\"color: #5abfe8\">Research</span>: " + subject.price;
         if (subject.price2 != 0) {
-            document.getElementById("midSecText3").innerHTML = "<span style=\"color: #cf50d8\">Insight</span>: " + subject.price2;
+            document.getElementById("midSecText3").innerHTML = "<span style=\"color: #f411bb\">Insight</span>: " + subject.price2;
         } else {
             document.getElementById("midSecText3").innerHTML = "";
         }

@@ -104,6 +104,9 @@ div.buttonDivs {
 p.scryText {
     color: #133266;
     text-align: center;
+    margin-left: 6%;
+    margin-right: 6%;
+    margin-bottom: 0px;
 }
 img.subButton {
     position: relative;
@@ -232,6 +235,14 @@ img.button {
 img.buttonCover {
     position: relative;
     top: -168px;
+    width: 90%;
+    height: 50px;
+    margin-left: 5%;
+    z-index: 2;
+}
+img.buttonCover2 {
+    position: relative;
+    top: -193px;
     width: 90%;
     height: 50px;
     margin-left: 5%;
