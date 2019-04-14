@@ -6,6 +6,7 @@
     <title>Reincarnate</title>
     <link rel="stylesheet" type="text/css" media="screen" href="StyleSheet.css" />
     <link rel="stylesheet" media="screen" href="https://fonts.googleapis.com/css?family=PT+Serif">
+    <script src="classes.js"></script>
     <script src="updateScript.js"></script>
 </head>
 <body onload="update()">
@@ -48,27 +49,27 @@
             </div> <!-- closes center resources -->
             <div id="buttons">
                 <div id="garageSaleDiv" class="buttonDivs">
-                    <img class="button" alt="oops" src="square.png">
+                    <img class="button" alt="oops" src="square.png" id="garageSaleImg">
                     <p class="buttonText">Garage Sale</p>
                     <p class="countText" id="garageSaleCount">0</p>
                     <p class="priceText" id="garageSalePrice">10 Money</p>
-                    <a onclick="garageSale.buy()" id="garageSaleLink" href="javascript:void(0)" onmouseover="buttonHover(event, this)" 
+                    <a onclick="garageSale.buy()" id="garageSaleLink" href="javascript:void(0)" onmouseover="buttonHover(event, this)"
                        onmousemove="buttonStay(event)" onmouseout="noButtonHover()"><img class="buttonCover" alt="oops" src="none.png"></a>
                 </div><!-- closes garage sale -->
                 <div id="walletDiv" class="buttonDivs">
-                    <img class="button" alt="oops" src="square.png">
-                    <p class="buttonText">wallet</p>
+                    <img class="button" alt="oops" src="square.png" id="walletImg">
+                    <p class="buttonText">Wallet</p>
                     <p class="countText" id="walletCount">0</p>
                     <p class="priceText" id="walletPrice">50 Money</p>
-                    <a onclick="wallet.buy()" id="walletLink" href="javascript:void(0)" onmouseover="buttonHover(event, this)" 
+                    <a onclick="wallet.buy()" id="walletLink" href="javascript:void(0)" onmouseover="buttonHover(event, this)"
                        onmousemove="buttonStay(event)" onmouseout="noButtonHover()"><img class="buttonCover" alt="oops" src="black.png" id="walletCover"></a>
                 </div><!-- closes wallet -->
                 <div id="ti84Div" class="buttonDivs">
-                    <img class="button" alt="oops" src="square.png">
+                    <img class="button" alt="oops" src="square.png" id="ti84Img">
                     <p class="buttonText">TI-84 Calculator</p>
                     <p class="countText" id="ti84Count">0</p>
                     <p class="priceText" id="ti84Price">101 Money</p>
-                    <a onclick="ti84.buy()" id="ti84Link" href="javascript:void(0)" onmouseover="buttonHover(event, this)" 
+                    <a onclick="ti84.buy()" id="ti84Link" href="javascript:void(0)" onmouseover="buttonHover(event, this)"
                        onmousemove="buttonStay(event)" onmouseout="noButtonHover()"><img class="buttonCover" alt="oops" src="black.png" id="ti84Cover"></a>
                 </div><!-- closes ti84 -->
             </div> <!-- closes center buttons -->
@@ -76,12 +77,47 @@
         <div id="orbColumn">
             <img class="orbButton" alt="oops" src="square.png">
             <p class="orbText">Consult the Orb!</p>
-            <a onclick="ti84.buy()" id="orbLink" href="javascript:void(0)" onmouseover="buttonHover(event, this)" 
+            <a onclick="openScry()" id="orbLink" href="javascript:void(0)" onmouseover="buttonHover(event, this)"
                onmousemove="buttonStay(event)" onmouseout="noButtonHover()"><img class="orbCover" alt="oops" src="black.png" id="orbCover"></a>
         </div> <!-- closes orb column -->
         <div id="rightcolumn">
             <p>Right Column</p>
         </div> <!-- closes right column -->
+        <div id="scryDiv" style="visibility: hidden">
+            <div id="scryTextDiv">
+                <p class="scryText" id="scryText">
+                    You peer into the ethereal depths of your scrying orb. In its burdening truths you can see parts of what lie ahead of you.
+                    In a careful motion your eyes perform an elegant dance with the future, careful not to get lost in the labyrinth of information. After a
+                    short time you begin to see an answer take form. You urge the vision to tell you what to do next. As it becomes clearer you can see that the
+                    orb is telling you to...
+                </p>
+                <div id="subButtonDiv">
+                    <div id="subDiv1" class="subButtonDiv">
+                        <img class="subButton" alt="oops" src="subGray.png" id="subButton1">
+                        <p class="subText" id="subText1">Text</p>
+                        <a onclick="updateScryButtonText(this)" id="subLink1" class="subLink" href="javascript:void(0)" onmouseover="buttonHover(event, this)"
+                           onmousemove="buttonStay(event)" onmouseout="noButtonHover()"><img class="subCover" alt="oops" src="none.png" id="subCover1"></a>
+                    </div>
+                    <div id="subDiv2" class="subButtonDiv">
+                        <img class="subButton" alt="oops" src="subGray.png" id="subButton2">
+                        <p class="subText" id="subText2">Text</p>
+                        <a onclick="updateScryButtonText(this)" id="subLink2" class="subLink" href="javascript:void(0)" onmouseover="buttonHover(event, this)"
+                           onmousemove="buttonStay(event)" onmouseout="noButtonHover()"><img class="subCover" alt="oops" src="none.png" id="subCover2"></a>
+                    </div>
+                    <div id="subDiv3" class="subButtonDiv">
+                        <img class="subButton" alt="oops" src="subGray.png" id="subButton3">
+                        <p class="subText" id="subText3">Text</p>
+                        <a onclick="updateScryButtonText(this)" id="subLink3" class="subLink" href="javascript:void(0)" onmouseover="buttonHover(event, this)"
+                           onmousemove="buttonStay(event)" onmouseout="noButtonHover()"><img class="subCover" alt="oops" src="none.png" id="subCover3"></a>
+                    </div>
+                </div>
+                </div> <!-- closes scry text -->
+                <div id="scryButtonDiv">
+                    <img class="scryButton" alt="oops" src="square.png">
+                    <p class="scryButtonText" id="scryButtonText">Next</p>
+                    <a onclick="updateScryText()" id="scryLink" href="javascript:void(0)"><img class="scryCover" alt="oops" src="none.png" id="scryCover"></a>
+                </div><!-- closes scry button -->
+            </div> <!-- closes scrying -->
         <div id="mouseOver">
             <div id="topSection">
                 <p id="topSecText">
@@ -93,6 +129,7 @@
             <div id="midSection">
                 <p id="midSecText" class="midSecText">+0.045/sec</p>
                 <p id="midSecText2" class="midSecText">Price Ratio: 1.15</p>
+                <p id="midSecText3" class="midSecText">Price Ratio: 1.15</p>
             </div> <!-- closes top section -->
             <div id="botSection">
                 <p id="botSecText" class="botSecText">There's a lot more in here than I remember</p>
