@@ -17,32 +17,38 @@
         <div id="centercolumn">
             <div id="resources">
                 <!-- followers -->
-                <p style="color: #000000" class="resourceTitle">Followers:</p>
+                <p style="color: #000000" class="resourceTitle" onmouseover="buttonHover(event, this)"
+                       onmousemove="buttonStay(event)" onmouseout="noButtonHover()" id="followerTitle">Followers:</p>
                 <p class="resourceAmount" id="followers">0</p>
                 <p class="resourceCap" id="followerCap">/ 1</p>
                 <p class="resourceRate" id="followerRate">(+0/sec)</p><br />
                 <!-- florgels -->
-                <p style="color: #19c910" class="resourceTitle" id="moneyTitle">Money:</p>
+                <p style="color: #19c910" class="resourceTitle" onmouseover="buttonHover(event, this)"
+                       onmousemove="buttonStay(event)" onmouseout="noButtonHover()" id="moneyTitle">Money:</p>
                 <p class="resourceAmount" id="money">10</p>
                 <p class="resourceCap" id="moneyCap">/ 100</p>
                 <p class="resourceRate" id="moneyRate">(+0/sec)</p><br />
                 <!-- research -->
-                <p style="color: #5abfe8" class="resourceTitle" id="researchTitle">Research:</p>
+                <p style="color: #5abfe8" class="resourceTitle" onmouseover="buttonHover(event, this)"
+                       onmousemove="buttonStay(event)" onmouseout="noButtonHover()" id="researchTitle">Research:</p>
                 <p class="resourceAmount" id="research">0</p>
                 <p class="resourceCap" id="researchCap">/ 100</p>
                 <p class="resourceRate" id="researchRate">(+0/sec)</p><br />
                 <!-- insight -->
-                <p style="color: #f411bb" class="resourceTitle" id="insightTitle">Insight:</p>
+                <p style="color: #f411bb" class="resourceTitle" onmouseover="buttonHover(event, this)"
+                       onmousemove="buttonStay(event)" onmouseout="noButtonHover()" id="insightTitle">Insight:</p>
                 <p class="resourceAmount" id="insight">0</p>
                 <p class="resourceCap" id="insightCap">/ 0</p>
                 <p class="resourceRate" id="insightRate">(+0/sec)</p><br />
                 <!-- blood -->
-                <p style="color: #7f0303" class="resourceTitle" id="bloodTitle">Blood:</p>
+                <p style="color: #7f0303" class="resourceTitle" onmouseover="buttonHover(event, this)"
+                       onmousemove="buttonStay(event)" onmouseout="noButtonHover()" id="bloodTitle">Blood:</p>
                 <p class="resourceAmount" id="blood">0</p>
                 <p class="resourceCap" id="bloodCap">/ 0</p>
                 <p class="resourceRate" id="bloodRate">(+0/sec)</p><br />
                 <!-- thread -->
-                <p style="color: #000000" class="resourceTitle" id="threadTitle">Thread:</p>
+                <p style="color: #000000" class="resourceTitle" onmouseover="buttonHover(event, this)"
+                       onmousemove="buttonStay(event)" onmouseout="noButtonHover()" id="threadTitle">Thread:</p>
                 <p class="resourceAmount" id="thread">0</p>
                 <p class="resourceCap" id="threadCap">/ 0</p>
                 <p class="resourceRate" id="threadRate">(+0/sec)</p><br />
@@ -137,19 +143,16 @@
             </div> <!-- closes scrying -->
         <div id="mouseOver">
             <div id="topSection">
-                <p id="topSecText">
-                    In order to get the ball rolling, you're gonna have to start selling some of your old belonings
-                    from your garage. Dont worry, none of this stuff was coming along for the ride anyways.
-                </p>
+                <p id="topSecText">Top Section</p>
                 <p id="secBorder">__________________________________</p>
             </div> <!-- closes top section -->
             <div id="midSection">
-                <p id="midSecText" class="midSecText">+0.045/sec</p>
-                <p id="midSecText2" class="midSecText">Price Ratio: 1.15</p>
-                <p id="midSecText3" class="midSecText">Price Ratio: 1.15</p>
+                <p id="midSecText" class="midSecText">Mid1</p>
+                <p id="midSecText2" class="midSecText">Mid1</p>
+                <p id="midSecText3" class="midSecText">Mid3</p>
             </div> <!-- closes top section -->
             <div id="botSection">
-                <p id="botSecText" class="botSecText">There's a lot more in here than I remember</p>
+                <p id="botSecText" class="botSecText">Bot</p>
             </div> <!-- closes bottom section -->
         </div> <!-- closes mouse over -->
     </div> <!-- closes container -->

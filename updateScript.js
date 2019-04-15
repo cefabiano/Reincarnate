@@ -6,11 +6,11 @@ var money = 10, moneyRate = 0, moneyCap = 100, research = 0, researchRate = 0, r
     thread = 0, threadRate = 0, threadCap = 0, followers = 0, followerCap = 1;
 
 //building stats
-let garageSale = new Building(10, 0, 1.13, 0, -1, true, "garageSaleImg", "+0.05 <span style=\"color: #19c910\">Money</span>/sec", "In order to get the ball rolling, you're gonna have to start selling some of your old belonings from your garage. Dont worry, none of this stuff was coming along for the ride anyways.", "There's more stuff in here than I remember");
+let garageSale = new Building(10, 0, 1.13, 0, -1, true, "garageSaleImg", "+0.18 <span style=\"color: #19c910\">Money</span>/sec", "In order to get the ball rolling, you're gonna have to start selling some of your old belonings from your garage. Dont worry, none of this stuff was coming along for the ride anyways.", "There's more stuff in here than I remember");
 let wallet = new Building(50, 0, 1.25, 0, -1, false, "walletImg", "100 max <span style=\"color: #19c910\">Money</span>", "A wallet you found on the ground. Used to store more money.", "Can store just about anything, really");
-let ti84 = new Building(101, 0, 1.13, 0, -1, false, "ti84Img", "+0.003 <span style=\"color: #5abfe8\">Research</span>/sec", "Top of the line calculator from Staples. It specializes in converting equations into line graphs.", "2318008");
-let microscope = new Building(550, 1, 1.15, 0, 1, false, "microscopeImg", "+0.02 <span style=\"color: #5abfe8\">Research</span>/sec<br>+6 max <span style=\"color: #5abfe8\">Research</span>", "A powerful microscope you allegedly stole from the high school you TA\'ed at for a year. Enhances sight drastically, allowing for deeper investigation.", "Sight beyond sight");
-let laundromat = new Building(900, 0, 1.15, 0, -1, false, "laundromatImg", "+0.5 <span style=\"color: #19c910\">Money</span>/sec", "Alright. It's time to start getting serious with money. Opening a small busniess should help you accelerate your funds to the next level.", "What do you mean that's not what money laundering means?");
+let ti84 = new Building(101, 0, 1.13, 0, -1, false, "ti84Img", "+0.012 <span style=\"color: #5abfe8\">Research</span>/sec", "Top of the line calculator from Staples. It specializes in converting equations into line graphs.", "2318008");
+let microscope = new Building(550, 1, 1.15, 0, 1, false, "microscopeImg", "+0.08 <span style=\"color: #5abfe8\">Research</span>/sec<br>+6 max <span style=\"color: #5abfe8\">Research</span>", "A powerful microscope you allegedly stole from the high school you TA\'ed at for a year. Enhances sight drastically, allowing for deeper investigation.", "Sight beyond sight");
+let laundromat = new Building(950, 0, 1.15, 0, -1, false, "laundromatImg", "+1.92 <span style=\"color: #19c910\">Money</span>/sec", "Alright. It's time to start getting serious with money. Opening a small busniess should help you accelerate your funds to the next level.", "What do you mean that's not what money laundering means?");
 var buildings = [garageSale, wallet, ti84, microscope, laundromat];
 var isOrb = false;
 
@@ -35,19 +35,19 @@ function update() {
     updateResource("money", "moneyRate", "moneyCap", money, moneyRate, moneyCap);
     updateResource("research", "researchRate", "researchCap", research, researchRate, researchCap);
     //update buttons
-    document.getElementById("garageSalePrice").innerHTML = (textCondense(garageSale.price) + " <span style=\"color: #19c910\">Money</span>");
-    updateCount("garageSaleCount", garageSale.count);
-    document.getElementById("walletPrice").innerHTML = (textCondense(wallet.price) + " <span style=\"color: #19c910\">Money</span>");
-    updateCount("walletCount", wallet.count);
-    document.getElementById("ti84Price").innerHTML = (textCondense(ti84.price) + " <span style=\"color: #19c910\">Money</span>");
-    updateCount("ti84Count", ti84.count);
-    document.getElementById("microscopePrice").innerHTML = (textCondense(microscope.price) + " <span style=\"color: #19c910\">Money</span>");
-    document.getElementById("microscopePrice2").innerHTML = (textCondense(microscope.price2) + " <span style=\"color: #5abfe8\">Research</span>");
-    updateCount("microscopeCount", microscope.count);
-    document.getElementById("laundromatPrice").innerHTML = (textCondense(laundromat.price) + " <span style=\"color: #19c910\">Money</span>");
-    updateCount("laundromatCount", laundromat.count);
     updateBoard();
     buildings.forEach(grayOut);
+    document.getElementById("garageSalePrice").innerHTML = (textCondense(garageSale.price) + " <span style=\"color: #19c910\">Money</span> <span style=\"color: #3a3a3a\">" + garageSale.updatePriceTime(1) + "</span>");
+    updateCount("garageSaleCount", garageSale.count);
+    document.getElementById("walletPrice").innerHTML = (textCondense(wallet.price) + " <span style=\"color: #19c910\">Money</span> <span style=\"color: #3a3a3a\">" + wallet.updatePriceTime(1) + "</span>");
+    updateCount("walletCount", wallet.count);
+    document.getElementById("ti84Price").innerHTML = (textCondense(ti84.price) + " <span style=\"color: #19c910\">Money</span> <span style=\"color: #3a3a3a\">" + ti84.updatePriceTime(1) + "</span>");
+    updateCount("ti84Count", ti84.count);
+    document.getElementById("microscopePrice").innerHTML = (textCondense(microscope.price) + " <span style=\"color: #19c910\">Money</span> <span style=\"color: #3a3a3a\">" + microscope.updatePriceTime(1) + "</span>");
+    document.getElementById("microscopePrice2").innerHTML = (textCondense(microscope.price2) + " <span style=\"color: #5abfe8\">Research</span> <span style=\"color: #3a3a3a\">" + microscope.updatePriceTime(2) + "</span>");
+    updateCount("microscopeCount", microscope.count);
+    document.getElementById("laundromatPrice").innerHTML = (textCondense(laundromat.price) + " <span style=\"color: #19c910\">Money</span> <span style=\"color: #3a3a3a\">" + laundromat.updatePriceTime(1) + "</span>");
+    updateCount("laundromatCount", laundromat.count);
 }
 function updateResource(string1, string2, string3, thing, thingRate, thingCap) {
     document.getElementById(string1).innerHTML = textCondense(thing).toString();
@@ -116,22 +116,26 @@ function textCondense(x) {
     } else if (x >= 0.01) {
         var temp = x.toString() + "0000";
         var temp2 = temp.indexOf(".");
-        if (x % 1 != 0) {
+        if (!Number.isInteger(x)) {
             return (temp.substring(0, (temp2 + 3)));
         } else {
             return x;
         }
-    } else if (x < 0.01){
+    } else if (x < 0.01) {
         var temp = x.toString() + "0000";
         var temp2 = temp.indexOf(".");
-        return (temp.substring(0, (temp2 + 4)));
+        if (!Number.isInteger(x)) {
+            return (temp.substring(0, (temp2 + 4)));
+        } else {
+            return x;
+        }
     }
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *//
 
 //value calculators * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\\
 function calculator() {
-    var sum = garageSale.count * 0.05 + laundromat.count * 0.5;
+    var sum = garageSale.count * 0.045 + laundromat.count * 0.48;
     moneyRate = sum;
     sum = wallet.count * 100 + 100;
     moneyCap = sum;
@@ -317,12 +321,55 @@ function buttonHover(event, id) {
         document.getElementById("midSecText2").innerHTML = "";
         document.getElementById("midSecText3").innerHTML = "";
         document.getElementById("botSecText").innerHTML = "The glassy walls of the orb of vision bounce with a rainbow of colors, giving off an air of a mysterious, yet positive future.";
+        document.getElementById("secBorder").innerHTML = "__________________________________";
     } else if (id.id == "subLink1") {
         updateHoverSub(scryArray[0]);
     } else if (id.id == "subLink2") {
         updateHoverSub(scryArray[1]);
     } else if (id.id == "subLink3") {
         updateHoverSub(scryArray[2]);
+    } else if (id.id == "followerTitle") {
+        document.getElementById("topSecText").innerHTML = "These are the people who are working towards a bright future, yourself included. Followers will grant benefits to the assimilation of certain resources among other things.";
+        document.getElementById("midSecText").innerHTML = "";
+        document.getElementById("midSecText2").innerHTML = "";
+        document.getElementById("midSecText3").innerHTML = "";
+        document.getElementById("botSecText").innerHTML = "A man is never weaker than when he has no one to scratch his back";
+        document.getElementById("secBorder").innerHTML = "";
+    } else if (id.id == "moneyTitle") {
+        document.getElementById("topSecText").innerHTML = "Currency sits at the center of progress. <span style=\"color: #19c910\">Money</span> can be traded to gain in all areas of life and afterlife.";
+        document.getElementById("midSecText").innerHTML = "";
+        document.getElementById("midSecText2").innerHTML = "";
+        document.getElementById("midSecText3").innerHTML = "";
+        document.getElementById("botSecText").innerHTML = "\"I like money\" ~ Eugene Krabs";
+        document.getElementById("secBorder").innerHTML = "";
+    } else if (id.id == "researchTitle") {
+        document.getElementById("topSecText").innerHTML = "In order to grow, one must know how. <span style=\"color: #5abfe8\">Research</span> is the discovery of new concepts and schools of thought through rigerous experimentation. When applied, <span style=\"color: #5abfe8\">research</span> points can be used to learn new subjects.";
+        document.getElementById("midSecText").innerHTML = "";
+        document.getElementById("midSecText2").innerHTML = "";
+        document.getElementById("midSecText3").innerHTML = "";
+        document.getElementById("botSecText").innerHTML = "Gallileo was once a shunned man as well, you know";
+        document.getElementById("secBorder").innerHTML = "";
+    } else if (id.id == "insightTitle") {
+        document.getElementById("topSecText").innerHTML = "Humans are not equipped to learn everything there is to know on their own. Thankfully there are powers above us that can grant <span style=\"color: #f411bb\">insight</span> towards new ideas. <span style=\"color: #f411bb\">Insight</span> points can be used to learn new subjects.";
+        document.getElementById("midSecText").innerHTML = "";
+        document.getElementById("midSecText2").innerHTML = "";
+        document.getElementById("midSecText3").innerHTML = "";
+        document.getElementById("botSecText").innerHTML = "";
+        document.getElementById("secBorder").innerHTML = "";
+    } else if (id.id == "bloodTitle") {
+        document.getElementById("topSecText").innerHTML = "When seeking a donation from otherworldly powers, it is important to share a part of you. <span style=\"color: #7f0303\">Blood</span> is used to access mystical objects and powers. <span style=\"color: #7f0303\">Blood</span> gain scales linearly with followers.";
+        document.getElementById("midSecText").innerHTML = "";
+        document.getElementById("midSecText2").innerHTML = "";
+        document.getElementById("midSecText3").innerHTML = "";
+        document.getElementById("botSecText").innerHTML = "How humorous";
+        document.getElementById("secBorder").innerHTML = "";
+    } else if (id.id == "threadTitle") {
+        document.getElementById("topSecText").innerHTML = "As the fates weave the thread of time, those bold enough try to cut pieces out for themselves. Thread is a rare resource used to craft new worlds and timelines.";
+        document.getElementById("midSecText").innerHTML = "";
+        document.getElementById("midSecText2").innerHTML = "";
+        document.getElementById("midSecText3").innerHTML = "";
+        document.getElementById("botSecText").innerHTML = "";
+        document.getElementById("secBorder").innerHTML = "";
     } else {
         return;
     }
@@ -341,6 +388,7 @@ function updateHover(building) {
     document.getElementById("midSecText2").innerHTML = "Price Ratio: " + building.priceRatio;
     document.getElementById("midSecText3").innerHTML = "";
     document.getElementById("botSecText").innerHTML = building.flavor;
+    document.getElementById("secBorder").innerHTML = "__________________________________";
 }
 function updateHoverSub(subject) {
     document.getElementById("topSecText").innerHTML = subject.desc;
@@ -357,6 +405,7 @@ function updateHoverSub(subject) {
         }
     }
     document.getElementById("botSecText").innerHTML = subject.flavor;
+    document.getElementById("secBorder").innerHTML = "__________________________________";
 }
 function buttonStay(event) {
     var x = event.clientX;

@@ -12,6 +12,7 @@ class Building{
         this.benefit = benefit;
         this.desc = desc;
         this.flavor = flavor;
+        this.isGray = true;
     }
     buy() {
         var success = 0;
@@ -176,9 +177,91 @@ class Building{
         }
         if (isWhite == 2) {
             document.getElementById(this.image).src = "square.png";
+            this.isGray = false;
         } else {
             document.getElementById(this.image).src = "gray.png";
-
+            this.isGray = true;
+        }
+    }
+    updatePriceTime(whichPrice) {
+        if (this.isGray) {
+            if (whichPrice == 1) {
+                var x = this.priceType;
+            } else {
+                var x = this.priceType2;
+            }
+            var y;
+            switch (x) {
+                case 0:
+                    if (x == this.priceType) {
+                        y = (this.price - money) / moneyRate;
+                    } else if (x == this.priceType2) {
+                        y = (this.price2 - money) / moneyRate;
+                    }
+                    break;
+                case 1:
+                    if (x == this.priceType) {
+                        y = (this.price - research) / researchRate;
+                    } else if (x == this.priceType2) {
+                        y = (this.price2 - research) / researchRate;
+                    }
+                    break;
+                case 2:
+                    if (x == this.priceType) {
+                        y = (this.price - insight) / insightRate;
+                    } else if (x == this.priceType2) {
+                        y = (this.price2 - insight) / insightRate;
+                    }
+                    break;
+                case 3:
+                    if (x == this.priceType) {
+                        y = (this.price - blood) / bloodRate;
+                    } else if (x == this.priceType2) {
+                        y = (this.price2 - blood) / bloodRate;
+                    }
+                    break;
+                case 4:
+                    if (x == this.priceType) {
+                        y = (this.price - thread) / threadRate;
+                    } else if (x == this.priceType2) {
+                        y = (this.price2 - thread) / threadRate;
+                    }
+                    break;
+            }
+            if (y > 345600) {
+                if ((y % 345600) > 14400) {
+                    return "(" + this.decimalCut(y / 345600) + "d " + this.decimalCut((y % 345600) / 14400) + "h)";
+                } else {
+                    return "(" + this.decimalCut(y / 345600) + "d)";
+                }
+            } else if (y > 14400) {
+                if ((y % 14400) > 240) {
+                    return "(" + this.decimalCut(y / 14400) + "h " + this.decimalCut((y % 14400) / 240) + "m)";
+                } else {
+                    return "(" + this.decimalCut(y / 14400) + "h)";
+                }
+            } else if (y > 240) {
+                if ((y % 240) > 4) {
+                    return "(" + this.decimalCut(y / 240) + "m " + this.decimalCut((y % 240) / 4) + "s)";
+                } else {
+                    return "(" + this.decimalCut(y / 240) + "m)";
+                }
+            } else if (y > 4) {
+                return "(" + this.decimalCut(y / 4) + "s)";
+            } else {
+                return "";
+            }
+        } else {
+            return "";
+        }
+    }
+    decimalCut(x) {
+        var temp = x.toString();
+        var temp2 = temp.indexOf(".");
+        if (!Number.isInteger(x)) {
+            return (temp.substring(0, (temp2)));
+        } else {
+            return x;
         }
     }
 }

@@ -213,7 +213,7 @@ p.midSecText {
 
 /*resource text styes*/
 p.resourceTitle {
-	display: inline;
+    display: inline;
 }
 p.resourceAmount {
 	display: inline;
@@ -268,7 +268,7 @@ p.countText {
 p.priceText {
     position: relative;
     top: -133px;
-    left: 42%;
+    left: 38%;
     margin-bottom: 0px;
     margin-top: 3px;
     z-index: 1;
