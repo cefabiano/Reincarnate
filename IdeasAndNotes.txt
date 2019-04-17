@@ -40,6 +40,9 @@ A reall cursed looking button that whispers slightly as your mouse draws near it
 the whispers get louder and your mouse eventually doesn't even have to be near it they're just always playing. This
 is something that'd happen if you really really fuck with the next world and make it crazy.
 
+A subject that has the description, benefit, and flavor text of "you shouldn't be seeing this" just like Default does
+to give the player that feel that they're breaking the game and getting into areas they aren't allowed.
+
 Things you can focus on increasing when crafting an afterlife: 
  - Max follower size
  - Money. I have an idea where the name of the currency changes every run because it's a new world.

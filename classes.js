@@ -115,6 +115,7 @@ class Building{
         }
         this.count++;
         this.price = this.price * this.priceRatio;
+        this.price2 = this.price2 * this.priceRatio;
     }
     gray() {
         var isWhite = 0;
@@ -228,40 +229,9 @@ class Building{
                     }
                     break;
             }
-            if (y > 345600) {
-                if ((y % 345600) > 14400) {
-                    return "(" + this.decimalCut(y / 345600) + "d " + this.decimalCut((y % 345600) / 14400) + "h)";
-                } else {
-                    return "(" + this.decimalCut(y / 345600) + "d)";
-                }
-            } else if (y > 14400) {
-                if ((y % 14400) > 240) {
-                    return "(" + this.decimalCut(y / 14400) + "h " + this.decimalCut((y % 14400) / 240) + "m)";
-                } else {
-                    return "(" + this.decimalCut(y / 14400) + "h)";
-                }
-            } else if (y > 240) {
-                if ((y % 240) > 4) {
-                    return "(" + this.decimalCut(y / 240) + "m " + this.decimalCut((y % 240) / 4) + "s)";
-                } else {
-                    return "(" + this.decimalCut(y / 240) + "m)";
-                }
-            } else if (y > 4) {
-                return "(" + this.decimalCut(y / 4) + "s)";
-            } else {
-                return "";
-            }
+            return timeCondense(y);
         } else {
             return "";
-        }
-    }
-    decimalCut(x) {
-        var temp = x.toString();
-        var temp2 = temp.indexOf(".");
-        if (!Number.isInteger(x)) {
-            return (temp.substring(0, (temp2)));
-        } else {
-            return x;
         }
     }
 }

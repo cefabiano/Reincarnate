@@ -9,8 +9,13 @@
     <script src="classes.js"></script>
     <script src="updateScript.js"></script>
 </head>
-<body onload="update()">
+<body onload="loadGame()">
     <div id="container">
+        <div id="miscBar">
+            <p class="miscText" id="saveText" onclick="saveGame()">Save</p>
+            <p class="miscText"> | </p>
+            <p class="miscText" id="clearText" onclick="clearSave()">Clear Save</p>
+        </div> <!-- closes miscellaneous bar -->
         <div id="leftcolumn">
             <p>Left Column</p>
         </div> <!-- closes left column -->
@@ -18,37 +23,36 @@
             <div id="resources">
                 <!-- followers -->
                 <p style="color: #000000" class="resourceTitle" onmouseover="buttonHover(event, this)"
-                       onmousemove="buttonStay(event)" onmouseout="noButtonHover()" id="followerTitle">Followers:</p>
+                   onmousemove="buttonStay(event)" onmouseout="noButtonHover()" id="followerTitle">Followers:</p>
                 <p class="resourceAmount" id="followers">0</p>
-                <p class="resourceCap" id="followerCap">/ 1</p>
-                <p class="resourceRate" id="followerRate">(+0/sec)</p><br />
+                <p class="resourceCap" id="followerCap">/ 1</p><br />
                 <!-- florgels -->
                 <p style="color: #19c910" class="resourceTitle" onmouseover="buttonHover(event, this)"
-                       onmousemove="buttonStay(event)" onmouseout="noButtonHover()" id="moneyTitle">Money:</p>
+                   onmousemove="buttonStay(event)" onmouseout="noButtonHover()" id="moneyTitle">Money:</p>
                 <p class="resourceAmount" id="money">10</p>
                 <p class="resourceCap" id="moneyCap">/ 100</p>
                 <p class="resourceRate" id="moneyRate">(+0/sec)</p><br />
                 <!-- research -->
                 <p style="color: #5abfe8" class="resourceTitle" onmouseover="buttonHover(event, this)"
-                       onmousemove="buttonStay(event)" onmouseout="noButtonHover()" id="researchTitle">Research:</p>
+                   onmousemove="buttonStay(event)" onmouseout="noButtonHover()" id="researchTitle">Research:</p>
                 <p class="resourceAmount" id="research">0</p>
                 <p class="resourceCap" id="researchCap">/ 100</p>
                 <p class="resourceRate" id="researchRate">(+0/sec)</p><br />
                 <!-- insight -->
                 <p style="color: #f411bb" class="resourceTitle" onmouseover="buttonHover(event, this)"
-                       onmousemove="buttonStay(event)" onmouseout="noButtonHover()" id="insightTitle">Insight:</p>
+                   onmousemove="buttonStay(event)" onmouseout="noButtonHover()" id="insightTitle">Insight:</p>
                 <p class="resourceAmount" id="insight">0</p>
                 <p class="resourceCap" id="insightCap">/ 0</p>
                 <p class="resourceRate" id="insightRate">(+0/sec)</p><br />
                 <!-- blood -->
                 <p style="color: #7f0303" class="resourceTitle" onmouseover="buttonHover(event, this)"
-                       onmousemove="buttonStay(event)" onmouseout="noButtonHover()" id="bloodTitle">Blood:</p>
+                   onmousemove="buttonStay(event)" onmouseout="noButtonHover()" id="bloodTitle">Blood:</p>
                 <p class="resourceAmount" id="blood">0</p>
                 <p class="resourceCap" id="bloodCap">/ 0</p>
                 <p class="resourceRate" id="bloodRate">(+0/sec)</p><br />
                 <!-- thread -->
                 <p style="color: #000000" class="resourceTitle" onmouseover="buttonHover(event, this)"
-                       onmousemove="buttonStay(event)" onmouseout="noButtonHover()" id="threadTitle">Thread:</p>
+                   onmousemove="buttonStay(event)" onmouseout="noButtonHover()" id="threadTitle">Thread:</p>
                 <p class="resourceAmount" id="thread">0</p>
                 <p class="resourceCap" id="threadCap">/ 0</p>
                 <p class="resourceRate" id="threadRate">(+0/sec)</p><br />
@@ -95,6 +99,15 @@
                     <a onclick="microscope.buy()" id="microscopeLink" href="javascript:void(0)" onmouseover="buttonHover(event, this)"
                        onmousemove="buttonStay(event)" onmouseout="noButtonHover()"><img class="buttonCover2" alt="oops" src="black.png" id="microscopeCover"></a>
                 </div><!-- closes microscope -->
+                <div id="tarotDeckDiv" class="buttonDivs" style="visibility: hidden;height: 0px;margin-bottom: 0px">
+                    <img class="button" alt="oops" src="square.png" id="tarotDeckImg">
+                    <p class="buttonText">Tarot Deck</p>
+                    <p class="countText" id="tarotDeckCount">0</p>
+                    <p class="priceText2" id="tarotDeckPrice">1500 Money</p>
+                    <p class="priceText2" id="tarotDeckPrice2">100 insight</p>
+                    <a onclick="tarotDeck.buy()" id="tarotDeckLink" href="javascript:void(0)" onmouseover="buttonHover(event, this)"
+                       onmousemove="buttonStay(event)" onmouseout="noButtonHover()"><img class="buttonCover2" alt="oops" src="black.png" id="tarotDeckCover"></a>
+                </div><!-- closes tarot deck -->
             </div> <!-- closes center buttons -->
         </div> <!-- closes center column -->
         <div id="orbColumn">
@@ -134,13 +147,13 @@
                            onmousemove="buttonStay(event)" onmouseout="noButtonHover()"><img class="subCover" alt="oops" src="none.png" id="subCover3"></a>
                     </div>
                 </div>
-                </div> <!-- closes scry text -->
-                <div id="scryButtonDiv">
-                    <img class="scryButton" alt="oops" src="square.png">
-                    <p class="scryButtonText" id="scryButtonText">Next</p>
-                    <a onclick="updateScryText()" id="scryLink" href="javascript:void(0)"><img class="scryCover" alt="oops" src="none.png" id="scryCover"></a>
-                </div><!-- closes scry button -->
-            </div> <!-- closes scrying -->
+            </div> <!-- closes scry text -->
+            <div id="scryButtonDiv">
+                <img class="scryButton" alt="oops" src="square.png">
+                <p class="scryButtonText" id="scryButtonText">Next</p>
+                <a onclick="updateScryText()" id="scryLink" href="javascript:void(0)"><img class="scryCover" alt="oops" src="none.png" id="scryCover"></a>
+            </div><!-- closes scry button -->
+        </div> <!-- closes scrying -->
         <div id="mouseOver">
             <div id="topSection">
                 <p id="topSecText">Top Section</p>
