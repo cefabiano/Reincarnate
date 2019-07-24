@@ -1,65 +1,109 @@
 ﻿body {
     font-family: 'PT Serif', serif;
-}
-::-webkit-scrollbar {
-    width: 5px;
-}
-::-webkit-scrollbar-track {
-    background: #133266;
-}
-::-webkit-scrollbar-thumb {
-    background: #184289;
+	overflow: hidden;
 }
 /*div styles*/
 #container {
-	width: 100%;
-    height: 100%;
+position: absolute;
+	width: auto;
+    height: auto;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    min-height: initial;
+    max-height: initial;
+    min-width: 1170px;
+	max-width: 1800px;
+	margin: auto 0px auto;
+	overflow: hidden;
 }
 #miscBar {
     width: 33%;
     height: 22px;
+	margin-top: 0px;
     position: relative;
     overflow: hidden;
 }
 #leftcolumn {
-    position: relative;
-	width: 33%;
-	height: 100%;
-	float: left;
+	width: 300px;
+	left: 0px;
+	bottom: 0px;
+	top: 22px;
+	min-width: 300px;
+	max-width: 500px;
+	min-height: initial;
+	max-height: initial;
+	height: auto;
+	margin: 0px;
+	overflow-y: auto;
+    position: absolute;
 	border-style: solid;
 	border-width: 1px;
 	border-color: #000000;
 	background-color: #FFFFFF;
 }
+#centercolumn::-webkit-scrollbar {
+    width: 0px;
+}
 #centercolumn {
-    width: 33%;
-    height: 100%;
-    float: left;
+    width: auto;
+	min-width: 500px;
+	max-width: 700px;
+	min-height: initial;
+	max-height: initial;
+    height: auto;
+	margin: auto, 0px, auto;
+	top: 0px;
+	left: 300px;
+	right: 370px;
+	padding: 0px;
+	overflow-x: hidden;
+	overflow-y: auto;
+    position: absolute;
     border-style: solid;
     border-width: 1px;
     background-color: #777777;
-    position: relative;
-    top: -14px;
 }
 #orbColumn {
-    width: 33%;
+    width: 370px;
+	min-width: initial;
+	max-width: initial;
+	min-height: initial;
+	max-height: initial;
     height: 130px;
-    float: left;
+	margin-top: 0px;
+	left: initial;
+	bottom: 0px;
+	right: 0px;
+	padding: 0px 0px;
+	overflow-y: hidden;
+	top: 0px;
+	display: block;
+    position: absolute;
     border-style: solid;
     border-width: 1px;
     background-color: #5b5b5b;
-    position: relative;
-    top: -14px;
 }
 #rightcolumn {
-    width: 33%;
-    height: 100%;
-    float: left;
+    width: 370px;
+	min-width: initial;
+	max-width: initial;
+	min-height: initial;
+	max-height: initial;
+    height: auto;
+	margin: auto;
+	left: initial;
+	bottom: 0px;
+	right: 0px;
+	padding: 0px 0px;
+	overflow-y: auto;
+	top: 130px;
+	display: block;
+    position: absolute;
     border-style: solid;
     border-width: 1px;
-    background-color: #FFFFFF;
-    position: relative;
-    top: -14px;
+    background-color: #777777;
 }
 #resources {
     margin-top: 12px;
@@ -77,17 +121,7 @@
 div.buttonDivs {
     margin-bottom: 35px;
     height: 50px;
-}
-#mouseOver {
-    position: fixed;
-    font-size: 14px;
-    width: 15%;
-    border-style: solid;
-    border-width: 1px;
-    background-color: #FFFFFF;
-    z-index: 20;
-    visibility: hidden;
-    pointer-events: none;
+	max-width: 476px;
 }
 
 /*miscellanous bar*/
@@ -114,6 +148,15 @@ p.miscText:hover {
     border-width: 1px;
     border-color: #000000;
     background-color: #4777c6;
+}
+#scryTextDiv::-webkit-scrollbar {
+    width: 5px;
+}
+#scryTextDiv::-webkit-scrollbar-track {
+    background: #133266;
+}
+#scryTextDiv::-webkit-scrollbar-thumb {
+    background: #184289;
 }
 #scryTextDiv {
     position: relative;
@@ -142,7 +185,6 @@ img.subButton {
     margin-top: 0px;
 }
 a.subLink {
-    position: relative;
     top: -100px;
     left: 25%;
 }
@@ -207,6 +249,17 @@ p.scryButtonText {
 }
 
 /*mouse over text sections*/
+#mouseOver {
+    position: fixed;
+    font-size: 14px;
+    width: 220px;
+    border-style: solid;
+    border-width: 1px;
+    background-color: #FFFFFF;
+    z-index: 20;
+    visibility: hidden;
+    pointer-events: none;
+}
 #topSection {
     width: 90%;
     margin-left: 5%;
@@ -234,6 +287,23 @@ p.midSecText {
     font-size: 10px;
     font-style: italic;
     color: #424242;
+}
+
+#tokenMouseOver {
+	position: fixed;
+	font-size: 14px;
+	width: 40px;
+	height: 20px;
+    border-style: solid;
+    border-width: 1px;
+    background-color: #FFFFFF;
+    z-index: 20;
+    visibility: hidden;
+    pointer-events: none;
+}
+#tokenHoverText {
+	margin: 0px;
+	text-align: center;
 }
 
 /*resource text styes*/
@@ -264,6 +334,7 @@ img.buttonCover {
     height: 50px;
     margin-left: 5%;
     z-index: 2;
+	cursor: pointer;
 }
 img.buttonCover2 {
     position: relative;
@@ -305,6 +376,55 @@ p.priceText2 {
     margin-bottom: 0px;
     margin-top: 3px;
     z-index: 1;
+}
+
+/*token holders*/
+div.tokenHolder {
+    width: 280px;
+    height: 100px;
+    margin: 0px 45px 0px;
+}
+div.THTitle {
+	width: 100%;
+	height: 50px;
+	margin: 0px;
+	top: 0px;
+	position: relative;
+}
+p.THTitleText {
+	margin: 0px;
+	font-size: 24px;
+	padding: 9px 6px;
+}
+img.tokenImage {
+	width: 36px;
+	height: 36px;
+	margin: 6px 0px 0px 40px;
+	top: -50px;
+	visibility: visible;
+	cursor: pointer;
+	pointer-events: none;
+	position: relative;
+	z-index: 2;
+}
+a.tokenImageLink {
+	visibility: hidden;
+	z-index: -1;
+}
+progress.tokenProgress {
+	width: 280px;
+	height: 50px;
+	top: 0px;
+	-webkit-appearance: none;
+	border: none;
+	position: relative;
+}
+progress.tokenProgress::-webkit-progress-bar {
+	background: #248f2b;
+}
+progress.tokenProgress::-webkit-progress-value {
+	background-color: #48c250;
+    box-shadow: var(--glow, 0 0 0px 0px #f2df0f);
 }
 
 /*orb column*/

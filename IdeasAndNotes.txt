@@ -32,13 +32,14 @@ because they were unfaithful and instead went to hell. there should be some way 
 through a building or whatever. Lost followers will slowly be replaced by new ones in the new world.
 
 Another way to get followers into the next world is for them to become martyrs. A follower may kill themselves
-and get replaced by another new follower only to be waiting for you when you arrive in the new world and your
+and get replaced by another new follower only to be waiting for you when you arrive in the new world when your
 cap is higher. This isn't something you can do a lot and requires you to have some tokens into follower count
 so that you'll veritably have room for them in the new world.
 
-A reall cursed looking button that whispers slightly as your mouse draws near it. Maybe as you fulfill some condition
+A really cursed looking button that whispers slightly as your mouse draws near it. Maybe as you fulfill some condition
 the whispers get louder and your mouse eventually doesn't even have to be near it they're just always playing. This
 is something that'd happen if you really really fuck with the next world and make it crazy.
+The "none" cursor property looks creepy as fuck.
 
 A subject that has the description, benefit, and flavor text of "you shouldn't be seeing this" just like Default does
 to give the player that feel that they're breaking the game and getting into areas they aren't allowed.
@@ -54,7 +55,7 @@ Things you can focus on increasing when crafting an afterlife:
    If the price of this next subject is way higher than one of the lower prices that you can pursue it'll be
    like "don't neglect other forms of research."
  - Insight. This is the more mystical approach to gaining knowledge. Insight is needed in addition to research for
-   upgrades ore realated to magical stuff. I want to really strongly emphazise that the research of magic is
+   upgrades more realated to magical stuff. I want to really strongly emphazise that the research of magic is
    a form of science and that stupid science magic schism fiction pushes forward is bs.
  - Blood. The most basic resource for the more mystical aspects of the game. This blood is taken from your followers
    so it will be directly proportional to your follower count. Maybe you can also get blood by just heading out
@@ -62,4 +63,18 @@ Things you can focus on increasing when crafting an afterlife:
  - Thread. This is thread stolen from the timeline woven by the fates. It is farmed slowly by an expensive building and
    is used to craft an afterlife. It's used in tokens and spent on the actual "create afterlife" button.
 
+Token Catagories: (third token slots may only be used a limited number of times probably, gets stupid expensive)
+ - Fortune. Increases money gain as well as slightly lowers the price ratio for money things on probably just the third
+   token a finite amount of times. This catagory will me the weakest overall but most focused.
+ - Enlightenment. Increases research and knowledge gains, first token largely buffs research, second buffs insight with
+   a little research and blood, idk about the third
+ - Power. This will be the most blood focused and maybe whatever mystical resource(s) i add. The third token will allow
+   for and then buff culling random innocents
+ - Self. First two tokens provide very general buffs that benefit every resource, third token provides a global price
+   ratio buff
+ - Perseverance. This token slot provides benefits to things like folower retention and martyrdom
+
 Flavor text on the create afterlife button has to be "Go forth and instantiate"
+
+
+3, 6, 14, 11, 11, 7, 4, 9, 17
