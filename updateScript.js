@@ -1,11 +1,15 @@
 // JavaScript source code
 var hyperMode = 1;
+var paused = false;
 var saveDataString = '{ "buildings" : [{ "count": 0}, { "count": 0}, { "count": 0}, { "count": 0}, { "count": 0}, { "count": 0}], ' +
     '"subjects" : [{ "completed": false}, { "completed": false}, { "completed": false}, { "completed": false}], ' +
-    '"resources" : [{"amount": 0}, { "amount": 10}, { "amount": 0}, { "amount": 0}, { "amount": 0}, { "amount": 0}] }';
+    '"resources" : [{"amount": 0}, { "amount": 10}, { "amount": 0}, { "amount": 0}, { "amount": 0}, { "amount": 0}], ' +
+    '"booleans" : [{"value": false}, {"value": false}] }';
+	//booleans: 0 = isOrb
 var saveData = JSON.parse(saveDataString);
 var saveReset = 0;
 var clearReset = 0;
+var updatingToken = "";
 
 
 //resource stats
@@ -25,6 +29,7 @@ var bloodFlavor = "How humorous";
 var threadDesc = "As the fates weave the thread of time, those bold enough try to cut pieces out for themselves. Thread is a rare resource used to craft new worlds and timelines.";
 var threadFlavor = "";
 
+//0 = money, 1 = research, 2 = insight, 3 = blood, 4 = thread
 //building stats
 let garageSale = new Building(10, 0, 1.13, 0, -1, true, "garageSaleImg", "+0.18 <span style=\"color: #19c910\">Money</span>/sec", "In order to get the ball rolling, you're gonna have to start selling some of your old belonings from your garage. Dont worry, none of this stuff was coming along for the ride anyways.", "There's more stuff in here than I remember");
 let wallet = new Building(50, 0, 1.25, 0, -1, false, "walletImg", "150 max <span style=\"color: #19c910\">Money</span>", "A wallet you found on the ground. Used to store more money.", "Can store just about anything, really");
@@ -44,47 +49,72 @@ let bloodLetting = new Subject("Blood Letting", 40, 100, true, true, tarot, "Gra
 var subjects = [curiosity, businessOwnership, tarot, bloodLetting];
 var scryArray = [];
 
+//token stats
+var fortuneCount = 0, enlightenmentCount = 0, powerCount = 0, selfCount = 0, perseveranceCount = 0;
+var fortuneTokens = [new Token("fortuneToken1", 8000, -1, -1, 0, -1, -1), new Token("fortuneToken2", 80000, -1, -1, 0, -1, -1), new Token("fortuneToken3", 10000000, -1, -1, 0, -1, -1)];
+
+//misc important stuff
+function devSpeed() {
+	if (hyperMode == 1)
+		hyperMode = 150;
+	else
+		hyperMode = 1;
+}
+function pause() {
+	if (paused)
+		paused = false;
+	else
+		paused = true;
+}
+
 //tick * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\\
 var interval = setInterval(update, 250);
 function update() {
-    calculator();
-    //add to resources
-    money = addClamp(money, moneyRate, moneyCap);
-    research = addClamp(research, researchRate, researchCap);
-    insight = addClamp(insight, insightRate, insightCap);
-    blood = addClamp(blood, bloodRate, bloodCap);
-    //update resource text
-    updateResource("money", "moneyRate", "moneyCap", money, moneyRate, moneyCap);
-    updateResource("research", "researchRate", "researchCap", research, researchRate, researchCap);
-    updateResource("insight", "insightRate", "insightCap", insight, insightRate, insightCap);
-    updateResource("blood", "bloodRate", "bloodCap", blood, bloodRate, bloodCap);
-    //update buttons
-    updateBoard();
-    buildings.forEach(grayOut);
-    document.getElementById("garageSalePrice").innerHTML = (textCondense(garageSale.price) + " <span style=\"color: #19c910\">Money</span> <span style=\"color: #3a3a3a\">" + garageSale.updatePriceTime(1) + "</span>");
-    updateCount("garageSaleCount", garageSale.count);
-    document.getElementById("walletPrice").innerHTML = (textCondense(wallet.price) + " <span style=\"color: #19c910\">Money</span> <span style=\"color: #3a3a3a\">" + wallet.updatePriceTime(1) + "</span>");
-    updateCount("walletCount", wallet.count);
-    document.getElementById("ti84Price").innerHTML = (textCondense(ti84.price) + " <span style=\"color: #19c910\">Money</span> <span style=\"color: #3a3a3a\">" + ti84.updatePriceTime(1) + "</span>");
-    updateCount("ti84Count", ti84.count);
-    document.getElementById("microscopePrice").innerHTML = (textCondense(microscope.price) + " <span style=\"color: #19c910\">Money</span> <span style=\"color: #3a3a3a\">" + microscope.updatePriceTime(1) + "</span>");
-    document.getElementById("microscopePrice2").innerHTML = (textCondense(microscope.price2) + " <span style=\"color: #5abfe8\">Research</span> <span style=\"color: #3a3a3a\">" + microscope.updatePriceTime(2) + "</span>");
-    updateCount("microscopeCount", microscope.count);
-    document.getElementById("laundromatPrice").innerHTML = (textCondense(laundromat.price) + " <span style=\"color: #19c910\">Money</span> <span style=\"color: #3a3a3a\">" + laundromat.updatePriceTime(1) + "</span>");
-    updateCount("laundromatCount", laundromat.count);
-    document.getElementById("tarotDeckPrice").innerHTML = (textCondense(tarotDeck.price) + " <span style=\"color: #19c910\">Money</span> <span style=\"color: #3a3a3a\">" + tarotDeck.updatePriceTime(1) + "</span>");
-    document.getElementById("tarotDeckPrice2").innerHTML = (textCondense(tarotDeck.price2) + " <span style=\"color: #5abfe8\">Research</span> <span style=\"color: #3a3a3a\">" + tarotDeck.updatePriceTime(2) + "</span>");
-    updateCount("tarotDeckCount", tarotDeck.count);
-    if (saveReset > 0) {
-        saveReset--;
-    } else {
-        document.getElementById("saveText").innerHTML = "Save";
-    }
-    if (clearReset > 0) {
-        clearReset--;
-    } else {
-        document.getElementById("clearText").innerHTML = "Clear Save";
-    }
+	if (!paused) {
+		calculator();
+		//add to resources
+		money = addClamp(money, moneyRate, moneyCap);
+		research = addClamp(research, researchRate, researchCap);
+		insight = addClamp(insight, insightRate, insightCap);
+		blood = addClamp(blood, bloodRate, bloodCap);
+		//update resource text
+		updateResource("money", "moneyRate", "moneyCap", money, moneyRate, moneyCap);
+		updateResource("research", "researchRate", "researchCap", research, researchRate, researchCap);
+		updateResource("insight", "insightRate", "insightCap", insight, insightRate, insightCap);
+		updateResource("blood", "bloodRate", "bloodCap", blood, bloodRate, bloodCap);
+		//update buttons
+		updateBoard();
+		buildings.forEach(grayOut);
+		document.getElementById("garageSalePrice").innerHTML = (textCondense(garageSale.price) + " <span style=\"color: #19c910\">Money</span> <span style=\"color: #3a3a3a\">" + garageSale.updatePriceTime(1) + "</span>");
+		updateCount("garageSaleCount", garageSale.count);
+		document.getElementById("walletPrice").innerHTML = (textCondense(wallet.price) + " <span style=\"color: #19c910\">Money</span> <span style=\"color: #3a3a3a\">" + wallet.updatePriceTime(1) + "</span>");
+		updateCount("walletCount", wallet.count);
+		document.getElementById("ti84Price").innerHTML = (textCondense(ti84.price) + " <span style=\"color: #19c910\">Money</span> <span style=\"color: #3a3a3a\">" + ti84.updatePriceTime(1) + "</span>");
+		updateCount("ti84Count", ti84.count);
+		document.getElementById("microscopePrice").innerHTML = (textCondense(microscope.price) + " <span style=\"color: #19c910\">Money</span> <span style=\"color: #3a3a3a\">" + microscope.updatePriceTime(1) + "</span>");
+		document.getElementById("microscopePrice2").innerHTML = (textCondense(microscope.price2) + " <span style=\"color: #5abfe8\">Research</span> <span style=\"color: #3a3a3a\">" + microscope.updatePriceTime(2) + "</span>");
+		updateCount("microscopeCount", microscope.count);
+		document.getElementById("laundromatPrice").innerHTML = (textCondense(laundromat.price) + " <span style=\"color: #19c910\">Money</span> <span style=\"color: #3a3a3a\">" + laundromat.updatePriceTime(1) + "</span>");
+		updateCount("laundromatCount", laundromat.count);
+		document.getElementById("tarotDeckPrice").innerHTML = (textCondense(tarotDeck.price) + " <span style=\"color: #19c910\">Money</span> <span style=\"color: #3a3a3a\">" + tarotDeck.updatePriceTime(1) + "</span>");
+		document.getElementById("tarotDeckPrice2").innerHTML = (textCondense(tarotDeck.price2) + " <span style=\"color: #5abfe8\">Research</span> <span style=\"color: #3a3a3a\">" + tarotDeck.updatePriceTime(2) + "</span>");
+		updateCount("tarotDeckCount", tarotDeck.count);
+		//update tokens
+		updateTokenProgress(calcTokenProgress(fortuneTokens, 0, 0), "fortune", fortuneCount);
+		if (updatingToken != "")
+			calcProgressPercent(updatingToken);
+
+		if (saveReset > 0) {
+			saveReset--;
+		} else {
+			document.getElementById("saveText").innerHTML = "Save";
+		}
+		if (clearReset > 0) {
+			clearReset--;
+		} else {
+			document.getElementById("clearText").innerHTML = "Clear Save";
+		}
+	}
 }
 function updateResource(string1, string2, string3, thing, thingRate, thingCap) {
     document.getElementById(string1).innerHTML = textCondense(thing).toString();
@@ -117,7 +147,7 @@ function updateBoard() {
         document.getElementById("tarotDeckDiv").style.marginBottom = "35px";
         document.getElementById("tarotDeckDiv").style.visibility = "visible";
     }
-    if (research >= 1) {
+    if (research >= 1 || isOrb) {
         document.getElementById("orbCover").src = "none.png";
         isOrb = true;
     }
@@ -140,6 +170,100 @@ function updateBoard() {
         tarotDeck.isOpen = true;
     }
     //.insertAdjacentHTML("afterend", "<p>My new paragraph</p>");
+}
+function calcTokenProgress(array, count, prog) {
+	var progress = 0;
+	var reduction = 0;
+	
+	for (var i = 0; i < count; i++) {
+		reduction += array[i].price;
+	}
+	progress += priceCompare(array[count].price - reduction, array[count].priceType, reduction)
+
+	if (array[count].priceType2 == -1)
+		progress *= 2;
+	else {
+		reduction = 0;
+		for (var i = 0; i < count; i++) {
+			reduction += array[i].price2;
+		}
+		progress += priceCompare(array[count].price2 - reduction, array[count].priceType2, reduction)
+	}
+
+	if (array[count].priceType3 == -1)
+		progress *= 1.5;
+	else {
+		reduction = 0;
+		for (var i = 0; i < count; i++) {
+			reduction += array[i].price3;
+		}
+		progress += priceCompare(array[count].price3 - reduction, array[count].priceType3, reduction)
+	}
+	
+	if (count < 2 && progress + prog == (count + 1) * 270) {
+		return calcTokenProgress(array, count + 1, progress + prog);
+	}
+	else {
+		return progress + prog;
+	}
+	console.log("this should never print");
+}
+function updateTokenProgress(progress, name, count) {
+	document.getElementById(name + "Progress").value = progress;
+
+	if (document.getElementById(name + "Progress").value >= (count + 1) * 270)
+	{
+		document.getElementById(name + "Token" + (count + 1)).style.pointerEvents = "auto";
+		document.getElementById(name + "Token" + (count + 1)).style.filter = "brightness(250%)";
+	}
+	else
+	{
+		document.getElementById(name + "Token" + (count + 1)).style.pointerEvents = "none";
+		document.getElementById(name + "Token" + (count + 1)).style.filter = "brightness(100%)";
+	}
+}
+function priceCompare(price, type, reduction) {
+    switch (type) {
+        case 0:
+			if (money - reduction < price)
+				return ((money - reduction) / price) * 90;
+			else
+				return 90;
+            break;
+        case 1:
+			if (research - reduction < price)
+				return ((research - reduction) / price) * 90;
+			else
+				return 90;
+            break;
+        case 2:
+			if (insight - reduction < price)
+				return ((insight - reduction) / price) * 90;
+			else
+				return 90;
+            break;
+        case 3:
+			if (blood - reduction < price)
+				return ((blood - reduction) / price) * 90;
+			else
+				return 90;
+            break;
+        case 4:
+			if (thread - reduction < price)
+				return ((thread - reduction) / price) * 90;
+			else
+				return 90;
+            break;
+    }
+	console.log("issue with passed price type, this shouldn't be printing");
+}
+function buyToken(x) {
+	switch (x) {
+		case 0:
+			fortuneTokens[fortuneCount].buy();
+			fortuneCount++;
+			break;
+	}
 }
 function grayOut(item) {
     item.gray();
@@ -243,6 +367,16 @@ function printSubs(subs) {
         x = x + subs[i].name;
     }
     return x;
+}
+function calcProgressPercent(string) {
+	var progress = document.getElementById(string).value;
+	if (string.includes("fortune")) {
+		progress -= 270 * fortuneCount;
+		var x = decimalCut((progress / 270) * 100);
+		if (x < 0)
+			x = 0;
+		document.getElementById("tokenHoverText").innerHTML = x + "%";
+	}
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *//
 
@@ -459,17 +593,25 @@ function buttonHover(event, id) {
         updateHoverResource(bloodDesc, bloodFlavor, blood, bloodRate, bloodCap);
     } else if (id.id == "threadTitle") {
         updateHoverResource(threadDesc, threadFlavor, thread, threadRate, threadCap);
-    } else {
-        return;
     }
-    document.getElementById("mouseOver").style.left = (x).toString() + "px";
-    if (y - document.getElementById("mouseOver").clientHeight >= 0) {
-        document.getElementById("mouseOver").style.top = (y - document.getElementById("mouseOver").clientHeight).toString() + "px";
+
+	if (id.id.includes("Progress")) {
+		id.style.setProperty("--glow", "0 0 10px 1px #f2df0f");
+		calcProgressPercent(id.id);
+		updatingToken = id.id;
+		var mouseOver = document.getElementById("tokenMouseOver");
+	}
+	else
+		var mouseOver = document.getElementById("mouseOver");
+
+    mouseOver.style.left = (x).toString() + "px";
+    if (y - mouseOver.clientHeight >= 0) {
+        mouseOver.style.top = (y - mouseOver.clientHeight).toString() + "px";
     } else {
-        document.getElementById("mouseOver").style.top = "0px";
+        mouseOver.style.top = "0px";
     }
-    document.getElementById("mouseOver").style.visibility = "visible";
-    document.getElementById("mouseOver").style.zIndex = "20";
+    mouseOver.style.visibility = "visible";
+    mouseOver.style.zIndex = "20";
 }
 function updateHover(building) {
     document.getElementById("topSecText").innerHTML = building.desc;
@@ -505,19 +647,34 @@ function updateHoverResource(desc, flavor, thing, thingRate, thingCap) {
     document.getElementById("midSecText3").innerHTML = "";
     document.getElementById("botSecText").innerHTML = flavor;
 }
-function buttonStay(event) {
+function buttonStay(event, id) {
     var x = event.clientX;
     var y = event.clientY;
-    document.getElementById("mouseOver").style.left = (x).toString() + "px";
-    if (y - document.getElementById("mouseOver").clientHeight >= 0) {
-        document.getElementById("mouseOver").style.top = (y - document.getElementById("mouseOver").clientHeight).toString() + "px";
+
+	if (id.id.includes("Progress")) {
+		var mouseOver = document.getElementById("tokenMouseOver");
+	}
+	else
+		var mouseOver = document.getElementById("mouseOver");
+
+    mouseOver.style.left = (x).toString() + "px";
+    if (y - mouseOver.clientHeight >= 0) {
+        mouseOver.style.top = (y - mouseOver.clientHeight).toString() + "px";
     } else {
-        document.getElementById("mouseOver").style.top = "0px";
+        mouseOver.style.top = "0px";
     }
 }
-function noButtonHover() {
-    document.getElementById("mouseOver").style.visibility = "hidden";
-    document.getElementById("mouseOver").style.zIndex = "-1";
+function noButtonHover(id) {
+	if (id.id.includes("Progress")) {
+		id.style.setProperty("--glow", "0 0 0px 0px #f2df0f");
+		updatingToken = "";
+		var mouseOver = document.getElementById("tokenMouseOver");
+	}
+	else
+		var mouseOver = document.getElementById("mouseOver");
+
+    mouseOver.style.visibility = "hidden";
+    mouseOver.style.zIndex = "-1";
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *//
 
@@ -529,16 +686,21 @@ function saveGame() {
     saveData.buildings[3].count = microscope.count;
     saveData.buildings[4].count = laundromat.count;
     saveData.buildings[5].count = tarotDeck.count;
+
     saveData.subjects[0].completed = curiosity.completed;
     saveData.subjects[1].completed = businessOwnership.completed;
     saveData.subjects[2].completed = tarot.completed;
     saveData.subjects[3].completed = bloodLetting.completed;
+
     saveData.resources[0].amount = followers;
     saveData.resources[1].amount = money;
     saveData.resources[2].amount = research;
     saveData.resources[3].amount = insight;
     saveData.resources[4].amount = blood;
     saveData.resources[5].amount = thread;
+
+	saveData.booleans[0].value = isOrb;
+
     var savePack = JSON.stringify(saveData);
     localStorage.setItem("ReincarnateSave", savePack);
     document.getElementById("saveText").innerHTML = "Saved!";
@@ -562,16 +724,21 @@ function loadGame() {
     calcPrice(laundromat);
     tarotDeck.count = saveData.buildings[5].count;
     calcPrice(tarotDeck);
+
     curiosity.completed = saveData.subjects[0].completed;
     businessOwnership.completed = saveData.subjects[1].completed;
     tarot.completed = saveData.subjects[2].completed;
     bloodLetting.completed = saveData.subjects[3].completed;
+
     followers = saveData.resources[0].amount;
     money = saveData.resources[1].amount;
     research = saveData.resources[2].amount;
     insight = saveData.resources[3].amount;
     blood = saveData.resources[4].amount;
     thread = saveData.resources[5].amount;
+
+	isOrb = saveData.booleans[0].value;
+
     clearSubjects(subjects.length);
     update();
 }

@@ -269,3 +269,169 @@ class Subject {
         this.completed = true;
     }
 }
+
+class Token {
+	constructor(name, price, price2, price3, priceType, priceType2, priceType3) {
+        this.name = name;
+        this.price = price;
+        this.price2 = price2;
+        this.price3 = price3;
+        this.priceType = priceType;
+        this.priceType2 = priceType2;
+        this.priceType3 = priceType3;
+	}
+    buy() {
+        var success = 0;
+        switch (this.priceType) {
+            case 0:
+                if (money >= this.price) {
+                    success++;
+                }
+                break;
+            case 1:
+                if (research >= this.price) {
+                    success++;
+                }
+                break;
+            case 2:
+                if (insight >= this.price) {
+                    success++;
+                }
+                break;
+            case 3:
+                if (blood >= this.price) {
+                    success++;
+                }
+                break;
+            case 4:
+                if (thread >= this.price) {
+                    success++;
+                }
+                break;
+        }
+		if (success != 1)
+			return;
+        switch (this.priceType2) {
+            case -1:
+                success++;
+                break;
+            case 0:
+                if (money >= this.price2) {
+                    success++;
+                }
+                break;
+            case 1:
+                if (research >= this.price2) {
+                    success++;
+                }
+                break;
+            case 2:
+                if (insight >= this.price2) {
+                    success++;
+                }
+                break;
+            case 3:
+                if (blood >= this.price2) {
+                    success++;
+                }
+                break;
+            case 4:
+                if (thread >= this.price2) {
+                    success++;
+                }
+                break;
+        }
+		if (success != 2)
+			return;
+        switch (this.priceType3) {
+            case -1:
+                success++;
+                break;
+            case 0:
+                if (money >= this.price3) {
+                    success++;
+                }
+                break;
+            case 1:
+                if (research >= this.price3) {
+                    success++;
+                }
+                break;
+            case 2:
+                if (insight >= this.price3) {
+                    success++;
+                }
+                break;
+            case 3:
+                if (blood >= this.price3) {
+                    success++;
+                }
+                break;
+            case 4:
+                if (thread >= this.price3) {
+                    success++;
+                }
+                break;
+        }
+        if (success == 3)
+            this.success();
+    }
+    success() {
+        switch (this.priceType) {
+            case 0:
+                money -= this.price;
+                break;
+            case 1:
+                research -= this.price;
+                break;
+            case 2:
+                insight -= this.price;
+                break;
+            case 3:
+                blood -= this.price;
+                break;
+            case 4:
+                thread -= this.price;
+                break;
+        }
+        switch (this.priceType2) {
+            case -1:
+                break;
+            case 0:
+                money -= this.price2;
+                break;
+            case 1:
+                research -= this.price2;
+                break;
+            case 2:
+                insight -= this.price2;
+                break;
+            case 3:
+                blood -= this.price2;
+                break;
+            case 4:
+                thread -= this.price2;
+                break;
+        }
+        switch (this.priceType3) {
+            case -1:
+                break;
+            case 0:
+                money -= this.price3;
+                break;
+            case 1:
+                research -= this.price3;
+                break;
+            case 2:
+                insight -= this.price3;
+                break;
+            case 3:
+                blood -= this.price3;
+                break;
+            case 4:
+                thread -= this.price3;
+                break;
+        }
+
+    }
+}
