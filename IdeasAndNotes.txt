@@ -41,7 +41,12 @@ the whispers get louder and your mouse eventually doesn't even have to be near i
 is something that'd happen if you really really fuck with the next world and make it crazy.
 
 A subject that has the description, benefit, and flavor text of "you shouldn't be seeing this" just like Default does
-to give the player that feel that they're breaking the game and getting into areas they aren't allowed.
+to give the player that feel that they're breaking the game and getting into areas they aren't allowed. I wonder if I can
+make it sound like a bug message instead of something fake, like really make it just look like a glitch or unfinished area
+when it's all intentional.
+
+Have a little bit of glow poof out from a number every time it hits a milestone like each thousand or million. Base it on the max
+amount so it doesn't just glow constantly when they're at +3k/s.
 
 Things you can focus on increasing when crafting an afterlife: 
  - Max follower size
